@@ -1,15 +1,16 @@
 .item { 
-  height: 6em;
+  height: 5em;
   width: 160px;
   font-family: fira mono; 
   font-size: 0.6em;
-  border-bottom: 2px solid #999; 
+  border-bottom: 2px solid #ccc; 
   border-left: 1px solid #eee;
   border-right: 1px solid #eee; 
   border-top: 1px solid #eee; 
   margin: 1px; 
   margin-left: 2px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
+  margin-top: 5px;
   padding: 5px;
   padding-bottom: 12px;
   background-color: #f9f9f9;
@@ -17,9 +18,9 @@
 }
 
 .item.selected-general {  
-  -webkit-box-shadow: 10px 10px 15px -6px rgba(0,0,0,0.75);
-  -moz-box-shadow: 10px 10px 15px -6px rgba(0,0,0,0.75);
-  box-shadow: 0px 0px 15px -6px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 0px 0px 20px -6px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 20px -6px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 20px -6px rgba(0,0,0,0.75);
   border-bottom: 2px solid #339; 
 
 }
@@ -56,6 +57,7 @@
   float: left; 
   position: absolute; 
   /* bottom:1em; */
+  font-size: 0.8em;
   bottom: 0em;
 }
 
@@ -66,14 +68,84 @@
   display: none;
 }
 .day-heading { 
+  margin-top: 2px;
+  border-top: 1px solid #ccc;
   font-family:  'Fira Sans';
+  width: 10000px; 
+  background-color: #dcdcdf;
+  opacity: 0.8;
   font-weight: 400;
-  font-size: 1.5em;
+  font-size: 0.6em;
+  padding-left: 90px; 
+  margin-left: -100px; 
+  margin-bottom: 5px;
   font-variant: small-caps;
 }
 
 .room-heading { 
-  padding-left: 15px; 
+  padding-left: 10px; 
   font-family:  'Fira Sans';
+  font-size: 0.7em;
+  xheight: 3em; 
+  margin-top: 2em;
+  vertical-align: middle;
   width: 100px; 
+  xposition: absolute; 
+}
+.row-alt-bg { 
+  background: #f6f6f6; 
+}
+
+
+/* Menubar styles */ 
+#search-leftover-dropdown { 
+  x-margin-top: 0px;
+  margin-left: 20px; 
+}
+#search-leftover-dropdown > button { 
+  margin-top: 9px;
+  
+}
+#search-leftover-courses-box {
+  font-family: 'Fira Mono';
+  x-padding: 20px;
+  x-margin-top: -6px;
+  border: 0;
+  border-radius: 0;
+  background: #f1f1f1;
+}
+
+#search-leftover-dropdown > ul > li > a , #search-leftover-dropdown > ul > input {
+  font-family: 'Fira Mono';
+  padding-left: 10px; 
+  text-decoration: none;
+  color: black; 
+  font-size: 0.8em;
+  width: 500px;
+}
+
+#filter-box { 
+  font-family: 'Fira Mono';
+  padding-left: 10px; 
+  margin-top: 9px;
+  margin-left: 15px;
+  font-size: 0.8em;
+  width: 100px;
+}
+
+#alloc-id-selected { 
+  display:block; 
+  font-family: 'Fira Mono';
+  padding-left: 2px; 
+  margin-top: 20px;
+  margin-left: 25px;
+  font-size: 0.6em;
+}
+
+
+/* filters and clash styles */ 
+.highlight-filter-box { 
+  xbackground: #FFFFE0;  /* lightyellow */ 
+  background: #E6E6FA; /* lavendar */ 
+  border-bottom: 2px solid #4B0082; 
 }

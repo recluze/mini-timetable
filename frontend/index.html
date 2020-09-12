@@ -31,11 +31,35 @@
                             class="btn btn-sm btn-primary" id='btn-refresh'><i class="fas fa-sync-alt"></i></button></a>
                 </li>
                 <li class="nav-item active"><a class="nav-link" href="#"><button type="button"
-                            class="btn btn-sm btn-primary" id='btn-check-clash'><i class="fas fa-times-circle"></i></button></a>
+                            class="btn btn-sm btn-primary" id='btn-check-clash'><i
+                                class="fas fa-times-circle"></i></button></a>
                 </li>
-                <li class="nav-item active"><a class="nav-link" href="#"><button type="button"
-                            class="btn btn-sm btn-primary" id='btn-swap'><i
+                <li class="nav-item active"><a class="nav-link" href="#">
+                        <button type="button" class="btn btn-sm btn-primary" id='btn-swap'><i
                                 class="fas fa-arrows-alt-h"></i></button></a></li>
+                <li class="nav-item active"><a class="nav-link" href="#">
+                        <button type="button" class="btn btn-sm btn-primary" id='btn-insert'><i
+                                class="fas fa-angle-double-down"></i></button></a></li>
+                <li>
+                    <div class="dropdown" id="search-leftover-dropdown">
+                        <button class="btn btn-primary btn-sm dropdown-toggle" type="button"
+                            data-toggle="dropdown">Remaining
+                            <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <input class="form-control input-sm" id="search-leftover-courses-box" type="text"
+                                placeholder="Search Remaining" autocomplete="off">
+                            <!-- li><a href="#">HTML</a></li -->
+                            <li>test1</li>
+                            <li>test2</li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item active">
+                    <input class="form-control" autocomplete="off" id="filter-box" type="text" placeholder="Find ...">
+                </li>
+                <li class="nav-item active">
+                    <span id='alloc-id-selected'></span>
+                </li>
             </ul>
         </div>
     </nav>
