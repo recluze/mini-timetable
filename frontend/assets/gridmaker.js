@@ -8,6 +8,23 @@ function make_day_heading(day_name) {
     day_div.className = 'day-heading';
     var cont = document.getElementById(main_container_id);
     cont.appendChild(day_div);
+
+    // also add the slot timings 
+    var slot_headings_row = document.createElement('div');
+    slot_headings_row.innerHTML = '<div class="room-heading slot-blank-room">&nbsp;</div>';
+    slot_headings_row.className = 'row';
+    var cont = document.getElementById(main_container_id);
+    // repeat for slots 
+    for (var idx in window.slot_timings) { 
+        timing = window.slot_timings[idx]; 
+
+        var slot_div = document.createElement('div'); 
+        slot_div.className = 'col-xs-1 item timings';
+        slot_div.innerHTML = timing;
+        slot_headings_row.appendChild(slot_div); 
+    }
+
+    cont.appendChild(slot_headings_row); 
 }
 
 function make_room_row(room_name, alt_bg) { 
@@ -25,7 +42,7 @@ function make_alloc_box(room_row, alloc_box_id) {
     var alloc_div = document.createElement('div');
     // alloc_div.innerHTML = alloc_id;
     alloc_div.id = alloc_box_id; 
-    alloc_div.className = 'col-xs-1 item target';
+    alloc_div.className = 'col-xs-1 item shallower target';
     
     // make inner divs 
     blank_symb = '&middot;'; 
@@ -48,6 +65,12 @@ function make_alloc_box(room_row, alloc_box_id) {
     in_div = document.createElement('div');
     in_div.innerHTML = blank_symb;
     in_div.className = 'teacher-name';
+    alloc_div.appendChild(in_div);
+
+    // badge for clash count 
+    in_div = document.createElement('span');
+    in_div.innerHTML = '55';
+    in_div.className = 'badge badge-danger clash-count';
     alloc_div.appendChild(in_div);
 
     room_row.appendChild(alloc_div);
@@ -399,7 +422,12 @@ function insert_from_remaining_handler() {
 }
 
 
-
+function check_clash_handler() { 
+    console.log("Checking clash...");
+    $("#Monday-Room6-slot1").addClass('in-clash-teacher');
+    $("#Monday-HallA-slot2").addClass('in-clash-student');
+    $("#Monday-HallA-slot2 .clash-count").show();
+}
 
 
 

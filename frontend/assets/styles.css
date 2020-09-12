@@ -1,5 +1,5 @@
 .item { 
-  height: 5em;
+  height: 4.5em;
   width: 160px;
   font-family: fira mono; 
   font-size: 0.6em;
@@ -15,6 +15,10 @@
   padding-bottom: 12px;
   background-color: #f9f9f9;
   position: relative;
+}
+
+.item.shallower { 
+  /* height: 3em; */ 
 }
 
 .item.selected-general {  
@@ -41,7 +45,7 @@
   clear: both; 
   width: 100%; 
   padding: 0 auto;
-  font-size: 1.2em;
+  font-size: 1em;
   text-align:center; 
   font-family: fira sans; 
 }
@@ -91,6 +95,23 @@
   vertical-align: middle;
   width: 100px; 
   xposition: absolute; 
+}
+.slot-blank-room { 
+  padding-bottom: 0px; 
+  padding-top: 0px; 
+  height: 0.1em;
+  margin-bottom: 0px; 
+  margin-top: 0px;
+}
+.timings { 
+  padding-bottom: 10px; 
+  padding-top: 0px; 
+  height: 0.1em;
+  margin-bottom: 0px; 
+  margin-top: 0px;
+  background: none; 
+  border: none; 
+  text-align: center;
 }
 .row-alt-bg { 
   background: #f6f6f6; 
@@ -148,4 +169,21 @@
   xbackground: #FFFFE0;  /* lightyellow */ 
   background: #E6E6FA; /* lavendar */ 
   border-bottom: 2px solid #4B0082; 
+}
+.in-clash-student { 
+  background: #FFFAD9; /* lavendar */ 
+  border-bottom: 2px solid red; 
+}
+
+.in-clash-teacher { 
+  background: #FFFFE0; /* lavendar */ 
+  border-bottom: 2px solid #808000; 
+}
+
+.clash-count { 
+  display: none; 
+  float: right; 
+  font-size: 0.9em;
+  opacity: 0.75;
+  margin-top: -7px;
 }
