@@ -1,0 +1,79 @@
+.item { 
+  height: 6em;
+  width: 160px;
+  font-family: fira mono; 
+  font-size: 0.6em;
+  border-bottom: 2px solid #999; 
+  border-left: 1px solid #eee;
+  border-right: 1px solid #eee; 
+  border-top: 1px solid #eee; 
+  margin: 1px; 
+  margin-left: 2px;
+  margin-bottom: 10px;
+  padding: 5px;
+  padding-bottom: 12px;
+  background-color: #f9f9f9;
+  position: relative;
+}
+
+.item.selected-general {  
+  -webkit-box-shadow: 10px 10px 15px -6px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 15px -6px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 15px -6px rgba(0,0,0,0.75);
+  border-bottom: 2px solid #339; 
+
+}
+
+.btn-activated { 
+  color: red;
+}
+
+.item .course-code { 
+  float: left; 
+}
+
+.item .class-section { 
+  float: right; 
+}
+
+.item .course-name { 
+  clear: both; 
+  width: 100%; 
+  padding: 0 auto;
+  font-size: 1.2em;
+  text-align:center; 
+  font-family: fira sans; 
+}
+
+.item .room-name { 
+  clear: both; 
+  float: left; 
+  position:absolute; bottom:0;
+}
+
+.item .teacher-name { 
+  clear: both; 
+  float: left; 
+  position: absolute; 
+  /* bottom:1em; */
+  bottom: 0em;
+}
+
+
+
+/* GUI styles */ 
+.alloc_id { 
+  display: none;
+}
+.day-heading { 
+  font-family:  'Fira Sans';
+  font-weight: 400;
+  font-size: 1.5em;
+  font-variant: small-caps;
+}
+
+.room-heading { 
+  padding-left: 15px; 
+  font-family:  'Fira Sans';
+  width: 100px; 
+}
