@@ -85,6 +85,29 @@ $(function () {
             }
         });
     }); 
+
+    
+    $('#btn-actions-save-timetable').click(function () {
+        console.log("Saving timetable current version."); 
+        
+        $.ajax({
+            type: "POST",
+            url: '/save_timetable',
+            data: { 
+                'timetable_name': window.timetable_name, 
+                'alloc_data': JSON.stringify(window.data), 
+                'id_detail_mapping': JSON.stringify(window.id_detail_mapping),
+                'student_to_course_map': JSON.stringify(window.student_to_course_map),
+                'course_to_student_map': JSON.stringify(window.course_to_student_map),
+                'all_clashes': JSON.stringify(window.all_clashes)  
+            }, 
+            success: function (data) {
+                response = $.parseJSON(data);
+                console.log(response); 
+            }
+        });
+    }); 
+
     /*
     $("#frm-new-timetable").submit(function (event) {
         event.preventDefault();

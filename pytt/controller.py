@@ -134,6 +134,12 @@ def perform_initial_setup(app, timetable_name, courses_filename, students_filena
     app.logger.info(timetable_name + " - " + courses_filename + " - " + students_filename + 
                         " [" + days_list + "] [" + rooms_list + "] [" + slots_list + "]")
 
+    # create blank data 
+    data_contents = {} 
+    data_filename = os.path.join(app.instance_path, app.config['UPLOAD_FOLDER'], timetable_name + "-data.json")
+    with open(data_filename, 'w') as file: 
+        file.write(data_contents)
+
     # create the required id_detail_mapping, student_to_course_map and course_to_student_map
     id_detail_mapping_contents = create_id_detail_mapping(app, courses_filename)
     id_detail_mapping_filename = os.path.join(app.instance_path, app.config['UPLOAD_FOLDER'], timetable_name + "-v0-id_detail_mapping.json")
@@ -169,11 +175,18 @@ def perform_initial_setup(app, timetable_name, courses_filename, students_filena
 
 
 def load_timetable_data_details(app, timetable_name): 
+    current_version = timetable_name[timetable_name.rfind('v')+1:]
+    # TODO: load latest variant of the current version 
+
+    data_filename = os.path.join(app.instance_path, app.config['UPLOAD_FOLDER'], timetable_name + "-data.json")
     id_detail_mapping_filename = os.path.join(app.instance_path, app.config['UPLOAD_FOLDER'], timetable_name + "-id_detail_mapping.json")
     student_to_course_map_filename = os.path.join(app.instance_path, app.config['UPLOAD_FOLDER'], timetable_name + "-student_course_map.json")
     course_to_student_map_filename = os.path.join(app.instance_path, app.config['UPLOAD_FOLDER'], timetable_name + "-course_student_map.json")
     clash_details_filename = os.path.join(app.instance_path, app.config['UPLOAD_FOLDER'], timetable_name + "-clash_details.json")
 
+
+    with open(data_filename) as json_file:
+        data = json.load(json_file)
 
     with open(id_detail_mapping_filename) as json_file:
         id_detail_mapping = json.load(json_file)
@@ -197,6 +210,8 @@ def load_timetable_data_details(app, timetable_name):
 
 
     all_data = {} 
+    all_data['timetable_name'] = timetable_name 
+    all_data['data'] = data 
     all_data['id_detail_mapping'] = id_detail_mapping
     all_data['student_to_course_map'] = student_to_course_map
     all_data['course_to_student_map'] = course_to_student_map
@@ -208,5 +223,28 @@ def load_timetable_data_details(app, timetable_name):
 
     
     all_data = json.dumps(all_data)
-    app.logger.info(all_data)
+    # app.logger.info(all_data)
+    app.logger.info(current_version)
     return all_data
+
+
+def save_timetable_details(app, timetable_name, all_data): 
+    # app.logger.info(all_data)
+
+    data_filename = os.path.join(app.instance_path, app.config['UPLOAD_FOLDER'], timetable_name + "-data.json")
+    id_detail_mapping_filename = os.path.join(app.instance_path, app.config['UPLOAD_FOLDER'], timetable_name + "-id_detail_mapping.json")
+    student_to_course_map_filename = os.path.join(app.instance_path, app.config['UPLOAD_FOLDER'], timetable_name + "-student_course_map.json")
+    course_to_student_map_filename = os.path.join(app.instance_path, app.config['UPLOAD_FOLDER'], timetable_name + "-course_student_map.json")
+    clash_details_filename = os.path.join(app.instance_path, app.config['UPLOAD_FOLDER'], timetable_name + "-clash_details.json")
+
+    app.logger.info(id_detail_mapping_filename)
+    data = all_data['alloc_data']
+    id_detail_mapping = all_data['id_detail_mapping']
+    student_to_course_map = all_data['student_to_course_map']
+    course_to_student_map = all_data['course_to_student_map']
+    clash_details = all_data['all_clashes']
+
+    with open(data_filename, 'w') as file: 
+        file.write(data)
+
+    return json.dumps({'success': True})

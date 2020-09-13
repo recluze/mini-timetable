@@ -149,7 +149,9 @@ function load_timetable(timetable_name) {
         success: function (data) {
             response = $.parseJSON(data);
             // console.log(response); 
-            window.data = {}; 
+            console.log(response); 
+            window.timetable_name = response['timetable_name'];
+            window.data = response['data']; 
             window.id_detail_mapping = response['id_detail_mapping'];
             window.student_to_course_map = response['student_to_course_map'];
             window.course_to_student_map = response['course_to_student_map'];
@@ -163,8 +165,8 @@ function load_timetable(timetable_name) {
             console.log("Loaded timetable data!"); 
 
             // let's refresh UI 
-            initial_populate_with_all_data(); 
             make_grid(); 
+            initial_populate_with_all_data(); 
             update_event_handlers(); 
 
         }

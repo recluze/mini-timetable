@@ -5,7 +5,7 @@ import json
 
 from pytt.controller import perform_initial_setup
 from pytt.controller import load_timetable_data_details
-
+from pytt.controller import save_timetable_details
 
 from flask.logging import default_handler
 
@@ -70,3 +70,12 @@ def load_timetable():
     app.logger.info("Loading timetable data for: " + timetable_name )
     
     return load_timetable_data_details(app, timetable_name)
+
+
+
+
+@app.route('/save_timetable', methods = ['GET', 'POST'])
+def save_timetable():
+    name_to_save = request.form['timetable_name']
+    app.logger.info("Saving timetable:" + name_to_save) 
+    return save_timetable_details(app, name_to_save, request.form)
