@@ -154,6 +154,8 @@ function load_timetable(timetable_name) {
             // let's refresh UI 
             initial_populate_with_all_data(); 
             make_grid(); 
+            update_event_handlers(); 
+
         }
     });
     $('#modal-load-timetable').modal('hide'); 
