@@ -103,6 +103,11 @@ $(function () {
             }, 
             success: function (data) {
                 response = $.parseJSON(data);
+                if (response['success']) { 
+                        $("#alert-box").modal();
+                } else { 
+
+                }
                 console.log(response); 
             }
         });

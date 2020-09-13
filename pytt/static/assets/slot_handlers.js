@@ -99,6 +99,7 @@ function find_alloc_box_for_alloc_id(target_alloc_id, set_to_blank = false) {
             }
         }
     }
+    return ''; // none found 
 }
 
 function split_alloc_box_id(alloc_box_id) { 
