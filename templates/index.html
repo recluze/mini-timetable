@@ -65,8 +65,6 @@
                             <input class="form-control input-sm" id="search-leftover-courses-box" type="text"
                                 placeholder="Search Remaining" autocomplete="off">
                             <!-- li><a href="#">HTML</a></li -->
-                            <li>test1</li>
-                            <li>test2</li>
                         </ul>
                     </div>
                 </li>
@@ -87,23 +85,58 @@
 
 
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="modal-new-timetable" tabindex="-1" role="dialog" aria-labelledby="modal-new-timetable"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Create new timetable</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    ...
+                    <form method='post' action='/new_timetable' enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for='txt_timetable_name'>Timetable Name</label>
+                            <input type="text" class="form-control form-control-sm" id="txt_timetable_name"
+                                aria-describedby="emailHelp" placeholder="Enter timetable name ..." />
+                        </div>
+                        <div class="form-group">
+                            <label for="file_offered_courses">Offered Courses CSV</label>
+                            <input type="file" class="form-control-file" id="file_offered_courses" name='file_offered_courses'>
+                        </div>
+                        <div class="form-group">
+                            <label for="file_registered_students">Registered Students CSV</label>
+                            <input type="file" class="form-control-file" id="file_registered_students" name='file_registered_students'>
+                        </div>
+
+                        <div class="form-group">
+                            <label for='txt_day_list'>Day List</label>
+                            <input type="text" class="form-control form-control-sm" id="txt_day_list"
+                                aria-describedby="emailHelp" placeholder="Enter day list (comma separated)"
+                                value='Monday, Tuesday, Wednesday, Thursday, Friday, Saturday' />
+                        </div>
+                        <div class="form-group">
+                            <label for='txt_room_list'>Room List</label>
+                            <input type="text" class="form-control form-control-sm" id="txt_room_list"
+                                aria-describedby="emailHelp" placeholder="Enter room list (comma separated)"
+                                value='MehboobLab, KhyberLab, AbidiLab, Room6, Room8, Room9, Room10, Room11, Room12, HallA, HallB' />
+                        </div>
+                        <div class="form-group">
+                            <label for='txt_slot_timings'>Slot Timings</label>
+                            <input type="text" class="form-control form-control-sm" id="txt_slot_list"
+                                aria-describedby="emailHelp" placeholder="Enter room list (comma separated)"
+                                value='8.00 - 9.30, 9.30 - 11.00, 11.00 - 12.30, 12.30 - 2.00, 2.00 - 3.30, 3.30 - 5.00, 5.00 - 6.30' />
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Create</button>
+                    </form>
                 </div>
-                <div class="modal-footer">
+                <!--div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+                </div-->
             </div>
         </div>
     </div>

@@ -42,7 +42,11 @@ $(function () {
         check_clash_handler(); 
     });
     
+    $("#btn-actions-new-timetable").click(function () {
+        $('#modal-new-timetable').modal();
+    });
 
+    
 
     // update all dynamic event handlers 
     update_event_handlers(); 

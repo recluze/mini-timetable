@@ -117,6 +117,12 @@
   background: #f6f6f6; 
 }
 
+#modal-new-timetable { 
+  font-size: 0.8em;
+}
+#modal-new-timetable input { 
+  font-size: 0.8em;
+}
 
 /* Menubar styles */ 
 #btn-actions { 
