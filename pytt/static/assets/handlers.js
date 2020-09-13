@@ -91,11 +91,14 @@ function highlight_filter_box_term() {
 
 
 function remaining_selected_click_handler(item_clicked) { 
+    // unselect whatever was selected 
+    $('.selected-general').removeClass('selected-general'); 
     var alloc_id_lbl = $(item_clicked).text(); 
     alloc_id = alloc_id_lbl.split(' ')[0];
-    alloc_id = alloc_id.substring(0, alloc_id.length-2);  
+    // alloc_id = alloc_id.substring(0, alloc_id.length-2);  
     console.log("Selecting alloc_id for scheduling: ", alloc_id); 
     $("#alloc-id-selected").html(alloc_id_lbl); 
+    check_clashes_for(alloc_id); 
 }
 
 function insert_from_remaining_handler() { 
@@ -171,9 +174,16 @@ function load_timetable(timetable_name) {
 
 function check_clash_handler() { 
     console.log("Checking clash...");
-    $("#Monday-Room6-slot1").addClass('in-clash-teacher');
-    $("#Monday-HallA-slot2").addClass('in-clash-student');
-    $("#Monday-HallA-slot2 .clash-count").show();
+    // $("#Monday-Room6-slot1").addClass('in-clash-teacher');
+    // $("#Monday-HallA-slot2").addClass('in-clash-student');
+    // $("#Monday-HallA-slot2 .clash-count").show();
+
+    if ($(".selected-general").length > 0) { 
+        alloc_box_id = $(".selected-general").attr('id'); 
+        alloc_id = get_alloc_id_from_box_id(alloc_box_id); 
+        check_clashes_for(alloc_id); 
+    } 
+    
 }
 
 

@@ -28,7 +28,8 @@ function find_all_remaining_alloc_ids() {
     for (var alloc_id in window.id_detail_mapping) { 
         if (!(all_allocated_ids.includes(alloc_id))) { 
             all_details = window.id_detail_mapping[alloc_id]; 
-            course_name = shorten_course_name(all_details['course_name']); 
+            course_name = all_details['course_name']; 
+            // course_name = shorten_course_name(course_name); 
             teacher_name = all_details['teacher_name']; 
             suffix = " [" + course_name + "] " + teacher_name; 
             alloc_id_extended = alloc_id + suffix; 
