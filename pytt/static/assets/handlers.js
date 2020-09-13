@@ -128,6 +128,37 @@ function insert_from_remaining_handler() {
 }
 
 
+function load_timetable(timetable_name) {
+    console.log("Loading timetable: " + timetable_name); 
+    
+    $.ajax({
+        type: "GET",
+        url: '/load_timetable',
+        data: {'timetable_name': timetable_name}, 
+        success: function (data) {
+            response = $.parseJSON(data);
+            // console.log(response); 
+            window.data = {}; 
+            window.id_detail_mapping = response['id_detail_mapping'];
+            window.student_to_course_map = response['student_to_course_map'];
+            window.course_to_student_map = response['course_to_student_map'];
+            window.all_clashes = response['clash_details'];
+
+            window.day_list = response['day_list'];
+            window.room_list = response['room_list'];
+            window.slot_list = response['slot_list'];
+            window.slot_timings = response['slot_timings'];
+
+            console.log("Loaded timetable data!"); 
+
+            // let's refresh UI 
+            initial_populate_with_all_data(); 
+            make_grid(); 
+        }
+    });
+    $('#modal-load-timetable').modal('hide'); 
+}
+
 function check_clash_handler() { 
     console.log("Checking clash...");
     $("#Monday-Room6-slot1").addClass('in-clash-teacher');

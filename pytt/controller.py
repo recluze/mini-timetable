@@ -163,4 +163,50 @@ def perform_initial_setup(app, timetable_name, courses_filename, students_filena
     os.remove(courses_filename)
     os.remove(students_filename)
 
-    return 'Done!'
+    return "Done. You may now load this timetable's V0"
+
+
+
+
+def load_timetable_data_details(app, timetable_name): 
+    id_detail_mapping_filename = os.path.join(app.instance_path, app.config['UPLOAD_FOLDER'], timetable_name + "-id_detail_mapping.json")
+    student_to_course_map_filename = os.path.join(app.instance_path, app.config['UPLOAD_FOLDER'], timetable_name + "-student_course_map.json")
+    course_to_student_map_filename = os.path.join(app.instance_path, app.config['UPLOAD_FOLDER'], timetable_name + "-course_student_map.json")
+    clash_details_filename = os.path.join(app.instance_path, app.config['UPLOAD_FOLDER'], timetable_name + "-clash_details.json")
+
+
+    with open(id_detail_mapping_filename) as json_file:
+        id_detail_mapping = json.load(json_file)
+
+    with open(student_to_course_map_filename) as json_file:
+        student_to_course_map = json.load(json_file)
+    
+    with open(course_to_student_map_filename) as json_file:
+        course_to_student_map = json.load(json_file)
+
+    with open(clash_details_filename) as json_file:
+        clash_details = json.load(json_file)
+
+
+    # TODO: Fix this. Why is this hard coded. Save when it comes in from the form for new timetable 
+    day_list = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    room_list = ['MehboobLab', 'KhyberLab', 'AbidiLab', 'Room6', 'Room8', 'Room9', 'Room10', 'Room11', 'Room12', 'HallA', 'HallB'];
+    slot_list = ['slot1', 'slot2', 'slot3', 'slot4', 'slot5', 'slot6', 'slot7'];
+    slot_timings = ['8.00 - 9.30', '9.30 - 11.00', '11.00 - 12.30', '12.30 - 2.00', '2.00 - 3.30', '3.30 - 5.00', '5.00 - 6.30'] 
+
+
+
+    all_data = {} 
+    all_data['id_detail_mapping'] = id_detail_mapping
+    all_data['student_to_course_map'] = student_to_course_map
+    all_data['course_to_student_map'] = course_to_student_map
+    all_data['clash_details'] = clash_details
+    all_data['day_list'] = day_list 
+    all_data['room_list'] = room_list 
+    all_data['slot_list'] = slot_list 
+    all_data['slot_timings'] = slot_timings 
+
+    
+    all_data = json.dumps(all_data)
+    app.logger.info(all_data)
+    return all_data

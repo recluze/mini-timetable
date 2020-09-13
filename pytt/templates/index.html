@@ -39,6 +39,7 @@
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="#" id='btn-actions-new-timetable'>New Timetable</a>
+                            <a class="dropdown-item" href="#" id='btn-actions-load-timetable'>Load Timetable</a>
 
                         </div>
                     </div>
@@ -99,7 +100,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method='post' action='/new_timetable' enctype="multipart/form-data">
+                    <form id='frm-new-timetable' method='post' action='/new_timetable' enctype="multipart/form-data">
                         <div class="form-group">
                             <label for='txt_timetable_name'>Timetable Name</label>
                             <input type="text" class="form-control form-control-sm" id="txt_timetable_name"
@@ -139,7 +140,7 @@
                                 value='8.00 - 9.30, 9.30 - 11.00, 11.00 - 12.30, 12.30 - 2.00, 2.00 - 3.30, 3.30 - 5.00, 5.00 - 6.30' />
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Create</button>
+                        <button type="submit" class="btn btn-primary" id='btn-new-timetable-submit'>Create</button>
                     </form>
                 </div>
                 <!--div class="modal-footer">
@@ -150,6 +151,33 @@
         </div>
     </div>
 
+
+    <div class="modal fade" id="modal-load-timetable" tabindex="-1" role="dialog" aria-labelledby="modal-load-timetable"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Load Timetable</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table id='load-timetables-list' class='table table-sm'>
+                        <tr>
+                            <th>Name</th>
+                            <th>Modified Date</th>
+                            <th>&nbsp;</th>
+                        </tr>
+                    </table>
+                </div>
+                <!--div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div-->
+            </div>
+        </div>
+    </div>
 
     <script>
 

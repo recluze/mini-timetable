@@ -1,8 +1,11 @@
 from flask import Flask, request
 from flask import render_template 
 import os 
+import json 
 
 from pytt.controller import perform_initial_setup
+from pytt.controller import load_timetable_data_details
+
 
 from flask.logging import default_handler
 
@@ -51,3 +54,19 @@ def new_timetable_request():
 
         return perform_initial_setup(app, timetable_name, courses_filename, students_filename, days_list, rooms_list, slots_list)
 
+
+
+@app.route('/get_timetables_list')
+def get_timetables_list():
+    return json.dumps([
+        {'name': 'Fall-2020-v0', 'modified_date': 'x'}
+    ])
+
+
+@app.route('/load_timetable')
+def load_timetable():
+    timetable_name = request.args.get('timetable_name') 
+
+    app.logger.info("Loading timetable data for: " + timetable_name )
+    
+    return load_timetable_data_details(app, timetable_name)

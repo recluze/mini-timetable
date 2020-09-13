@@ -12,7 +12,9 @@ all_ramaining_alloc_ids = []
 
 max_course_name_length = 20;
 
+// data from the backend. Everything other than data is read only 
 data = {} 
 id_detail_mapping = {} 
 student_to_course_map = {} 
 course_to_student_map = {} 
+all_clashes = {} 
