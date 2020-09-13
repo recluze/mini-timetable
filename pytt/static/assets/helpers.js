@@ -38,6 +38,10 @@ $(function () {
         insert_from_remaining_handler();
     });
 
+    $("#btn-remove").click(function () {
+        remove_selected_handler();
+    });
+
     $("#btn-check-clash").click(function () {
         check_clash_handler();
     });

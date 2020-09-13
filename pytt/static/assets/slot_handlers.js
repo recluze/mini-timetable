@@ -1,3 +1,12 @@
+function get_alloc_id_from_box_id(alloc_box_id) { 
+    parts = alloc_box_id.split('-'); 
+    day_name = parts[0];
+    room_name = parts[1]; 
+    slot_name = parts[2]; 
+    return window.data[day_name][room_name][slot_name]['id']
+
+}
+
 function find_all_remaining_alloc_ids() { 
     // reset it 
     window.all_remaining_alloc_ids = []; 
@@ -13,7 +22,7 @@ function find_all_remaining_alloc_ids() {
             }
         }
     }
-    console.log("Following have been done:", all_allocated_ids); 
+    // console.log("Following have been done:", all_allocated_ids); 
 
     // go through all the ones in id_detail_mapping and remove ones in data 
     for (var alloc_id in window.id_detail_mapping) { 
@@ -26,7 +35,7 @@ function find_all_remaining_alloc_ids() {
             all_remaining_alloc_ids.push(alloc_id_extended); 
         }
     } 
-    console.log("Following remain: ", window.all_remaining_alloc_ids);     
+    // console.log("Following remain: ", window.all_remaining_alloc_ids);     
     populate_nav_dropdown_remaining_allocs();
 }
 
@@ -40,7 +49,7 @@ function populate_nav_dropdown_remaining_allocs() {
     // then add from window.all_remaining_alloc_ids 
     for (var idx in window.all_remaining_alloc_ids) {
         alloc_id = window.all_remaining_alloc_ids[idx]; 
-        console.log(alloc_id); 
+        // console.log(alloc_id); 
 
         var alloc_li = document.createElement('li');
         alloc_li.innerHTML = "<a href='#' class='remaining-selected'>"+alloc_id+"</a>";
@@ -169,5 +178,27 @@ function swap_alloc_boxes(source_box_id, target_box_id) {
     // change backend data too! 
     update_record_of_alloc_id(source_box_id, target_alloc_id); 
     update_record_of_alloc_id(target_box_id, source_alloc_id); 
+}
+
+function remove_selected_alloc_box(alloc_box_id) { 
+    console.log("Will remove from slot:",  alloc_box_id); 
+    // make box empty 
+    populate_alloc_box(alloc_box_id, '');
+    // update record in data 
+    alloc_id = get_alloc_id_from_box_id(alloc_box_id); 
+    console.log("Found alloc_id for removal: ", alloc_id)
+    removed_alloc_box_id = find_alloc_box_for_alloc_id(alloc_id, true)
+    console.log("Removed: ", removed_alloc_box_id); 
+    // sanity check 
+    if (removed_alloc_box_id != alloc_box_id) { 
+        console.error("BAD REMVOVAL! See Log above!"); 
+    } 
+
+    // update remaining and their handlers 
+    find_all_remaining_alloc_ids(); 
+    update_event_handlers(); 
+
+    // unselect 
+    $(".item").removeClass("selected-general"); 
 }
 

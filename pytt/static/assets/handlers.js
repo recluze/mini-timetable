@@ -128,6 +128,14 @@ function insert_from_remaining_handler() {
 }
 
 
+function remove_selected_handler() { 
+    if ($(".selected-general").length > 0) { 
+        // get the ID of whatever is selected 
+        remove_source = $(".selected-general").attr('id');
+        remove_selected_alloc_box(remove_source); 
+    }
+}
+
 function load_timetable(timetable_name) {
     console.log("Loading timetable: " + timetable_name); 
     
