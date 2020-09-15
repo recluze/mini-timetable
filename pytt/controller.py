@@ -165,9 +165,18 @@ def perform_initial_setup(app, timetable_name, courses_filename, students_filena
     app.logger.info(timetable_name + " - " + courses_filename + " - " + students_filename + 
                         " [" + days_list + "] [" + rooms_list + "] [" + slots_list + "]")
 
+    # meta-data 
+    meta_data_contents = {} 
+    meta_data_contents['days_list'] = [x.strip() for x in days_list.split(',')]
+    meta_data_contents['rooms_list'] = [x.strip() for x in rooms_list.split(',')]
+    meta_data_contents['slots_list'] = [x.strip() for x in slots_list.split(',')]
+    meta_data_filename = os.path.join(app.instance_path, app.config['UPLOAD_FOLDER'], timetable_name + "-v0-meta-data.json")
+    with open(meta_data_filename, 'w') as file: 
+        file.write(json.dumps(meta_data_contents))
+
     # create blank data 
     data_contents = {} 
-    data_filename = os.path.join(app.instance_path, app.config['UPLOAD_FOLDER'], timetable_name + "-data.json")
+    data_filename = os.path.join(app.instance_path, app.config['UPLOAD_FOLDER'], timetable_name + "-v0-data.json")
     with open(data_filename, 'w') as file: 
         file.write(json.dumps(data_contents))
 
@@ -196,9 +205,9 @@ def perform_initial_setup(app, timetable_name, courses_filename, students_filena
     with open(clash_details_filename, 'w') as file: 
         file.write(clash_details)
 
-    # TODO: REMOVE! only doing this for dev time 
-    os.remove(courses_filename)
-    os.remove(students_filename)
+    # xTODO: REMOVE! only doing this for dev time 
+    # os.remove(courses_filename)
+    # os.remove(students_filename)
 
     return "Done. You may now load this timetable's V0"
 
@@ -208,12 +217,14 @@ def perform_initial_setup(app, timetable_name, courses_filename, students_filena
 def load_timetable_data_details(app, timetable_name): 
     current_version = timetable_name[timetable_name.rfind('v')+1:]
     # TODO: load latest variant of the current version 
+    # Not yet. Low priority feature. 
 
     data_filename = os.path.join(app.instance_path, app.config['UPLOAD_FOLDER'], timetable_name + "-data.json")
     id_detail_mapping_filename = os.path.join(app.instance_path, app.config['UPLOAD_FOLDER'], timetable_name + "-id_detail_mapping.json")
     student_to_course_map_filename = os.path.join(app.instance_path, app.config['UPLOAD_FOLDER'], timetable_name + "-student_course_map.json")
     course_to_student_map_filename = os.path.join(app.instance_path, app.config['UPLOAD_FOLDER'], timetable_name + "-course_student_map.json")
     clash_details_filename = os.path.join(app.instance_path, app.config['UPLOAD_FOLDER'], timetable_name + "-clash_details.json")
+    meta_data_filename = os.path.join(app.instance_path, app.config['UPLOAD_FOLDER'], timetable_name + "-meta-data.json")
 
 
     with open(data_filename) as json_file:
@@ -232,11 +243,17 @@ def load_timetable_data_details(app, timetable_name):
         clash_details = json.load(json_file)
 
 
-    # TODO: Fix this. Why is this hard coded. Save when it comes in from the form for new timetable 
-    day_list = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    room_list = ['MehboobLab', 'KhyberLab', 'AbidiLab', 'Room5', 'Room6', 'Room8', 'Room9', 'Room10', 'Room11', 'Room12', 'HallA', 'HallB', 'CallLab', 'CommLab'];
+    with open(clash_details_filename) as json_file:
+        clash_details = json.load(json_file)
+
+    with open(meta_data_filename) as json_file: 
+        meta_data_details = json.load(json_file)
+
+    day_list = meta_data_details['days_list'] 
+    room_list = meta_data_details['rooms_list'] 
+    slot_timings = meta_data_details['slots_list']
+    slot_list = ['slot' + str(i+1) for i in range(len(slot_timings))]
     slot_list = ['slot1', 'slot2', 'slot3', 'slot4', 'slot5', 'slot6', 'slot7'];
-    slot_timings = ['8.00 - 9.30', '9.30 - 11.00', '11.00 - 12.30', '12.30 - 2.00', '2.00 - 3.30', '3.30 - 5.00', '5.00 - 6.30'] 
 
 
 

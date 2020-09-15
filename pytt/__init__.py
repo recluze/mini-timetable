@@ -7,6 +7,10 @@ from pytt.controller import perform_initial_setup
 from pytt.controller import load_timetable_data_details
 from pytt.controller import save_timetable_details
 
+from pytt.preferences import make_preferences_page
+from pytt.export import export_timetable
+
+
 from flask.logging import default_handler
 
 
@@ -17,9 +21,18 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 app.config['UPLOAD_FOLDER'] = 'uploaded'
 
 @app.route('/')
-def hello_world():
+def timetable_page():
     return render_template('index.html') 
 
+
+@app.route('/set_preferences')
+def set_preferences():
+    return make_preferences_page()
+
+@app.route('/export')
+def export(): 
+    timetable_name = request.args.get('timetable_name')
+    return export_timetable(timetable_name, app) 
 
 @app.route('/new_timetable', methods = ['GET', 'POST'])
 def new_timetable_request():
