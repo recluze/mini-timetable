@@ -48,11 +48,12 @@ def new_timetable_request():
         # process uploads and create SQLite files based on this new timetable         
 
         timetable_name = request.form['txt_timetable_name']
+        merge_list = request.form['txt_merge_list']
         days_list = request.form['txt_day_list']
         rooms_list = request.form['txt_room_list']
         slots_list = request.form['txt_slot_list']
 
-        return perform_initial_setup(app, timetable_name, courses_filename, students_filename, days_list, rooms_list, slots_list)
+        return perform_initial_setup(app, timetable_name, courses_filename, students_filename, merge_list, days_list, rooms_list, slots_list)
 
 
 

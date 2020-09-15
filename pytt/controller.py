@@ -5,7 +5,35 @@ import json
 def join_code_section(course_code, class_section): 
     return course_code + "-" + class_section
 
-def create_student_to_course_map(app, students_filename): 
+
+def fix_merged_course(course_code, class_section, merge_list, app):
+    # find a replacement if any 
+    merge_list = merge_list.split("\n")
+    for line in merge_list: 
+        if line.strip() == '': 
+            continue
+
+        parts = line.strip().split(",")
+        good_course_code = parts[0].split(' ')[0].strip()
+        good_class_section  = parts[0].split(' ')[1].strip()
+
+        bad_courses = parts[1:]
+
+        for bad_course in bad_courses: 
+            bad_course = bad_course.strip()
+            bad_parts = bad_course.split(' ')
+            bad_course_code = bad_parts[0].strip()
+            bad_class_section = bad_parts[1].strip()
+
+            if bad_course_code == course_code and bad_class_section == class_section: 
+                # found it 
+                app.logger.info("Replacing: " + bad_course_code + " " + bad_class_section + " - with - " + good_course_code, " " + good_class_section)
+                return (good_course_code, good_class_section)
+        
+    # already good if found in merge list 
+    return (course_code, class_section)
+
+def create_student_to_course_map(app, students_filename, merge_list): 
     all_mappings = {} 
 
     with open(students_filename) as csv_file:
@@ -25,7 +53,8 @@ def create_student_to_course_map(app, students_filename):
             course_code = row[4]
             class_section = row[7]
             
-            course_identifier = join_code_section(course_code, class_section)
+            fixed_course_code, fixed_class_section = fix_merged_course(course_code, class_section, merge_list, app)
+            course_identifier = join_code_section(fixed_course_code, fixed_class_section)
         
             if student_id not in all_mappings: 
                 all_mappings[student_id] = {'student_name': student_name}  # initialize only once 
@@ -41,7 +70,7 @@ def create_student_to_course_map(app, students_filename):
     return json.dumps(all_mappings) 
 
 
-def create_course_to_student_map(app, students_filename): 
+def create_course_to_student_map(app, students_filename, merge_list): 
     all_mappings = {} 
 
     with open(students_filename) as csv_file:
@@ -60,8 +89,10 @@ def create_course_to_student_map(app, students_filename):
             student_name = row[3]
             course_code = row[4]
             class_section = row[7]
+
+            fixed_course_code, fixed_class_section = fix_merged_course(course_code, class_section, merge_list, app)
             
-            course_identifier = join_code_section(course_code, class_section)
+            course_identifier = join_code_section(fixed_course_code, fixed_class_section)
         
             if course_identifier not in all_mappings: 
                 all_mappings[course_identifier] = [] # initialize only once 
@@ -130,7 +161,7 @@ def create_id_detail_mapping(app, courses_filename):
         # app.logger.info(all_mappings)
         return json.dumps(all_mappings) 
 
-def perform_initial_setup(app, timetable_name, courses_filename, students_filename, days_list, rooms_list, slots_list): 
+def perform_initial_setup(app, timetable_name, courses_filename, students_filename, merge_list, days_list, rooms_list, slots_list): 
     app.logger.info(timetable_name + " - " + courses_filename + " - " + students_filename + 
                         " [" + days_list + "] [" + rooms_list + "] [" + slots_list + "]")
 
@@ -138,7 +169,7 @@ def perform_initial_setup(app, timetable_name, courses_filename, students_filena
     data_contents = {} 
     data_filename = os.path.join(app.instance_path, app.config['UPLOAD_FOLDER'], timetable_name + "-data.json")
     with open(data_filename, 'w') as file: 
-        file.write(data_contents)
+        file.write(json.dumps(data_contents))
 
     # create the required id_detail_mapping, student_to_course_map and course_to_student_map
     id_detail_mapping_contents = create_id_detail_mapping(app, courses_filename)
@@ -147,13 +178,13 @@ def perform_initial_setup(app, timetable_name, courses_filename, students_filena
         file.write(id_detail_mapping_contents)
 
     # student_to_course_map 
-    student_to_course_map = create_student_to_course_map(app, students_filename)
+    student_to_course_map = create_student_to_course_map(app, students_filename, merge_list)
     student_to_course_map_filename = os.path.join(app.instance_path, app.config['UPLOAD_FOLDER'], timetable_name + "-v0-student_course_map.json")
     with open(student_to_course_map_filename, 'w') as file: 
         file.write(student_to_course_map)
 
     # course_to_student_map 
-    course_to_student_map = create_course_to_student_map(app, students_filename)
+    course_to_student_map = create_course_to_student_map(app, students_filename, merge_list)
     course_to_student_map_filename = os.path.join(app.instance_path, app.config['UPLOAD_FOLDER'], timetable_name + "-v0-course_student_map.json")
     with open(course_to_student_map_filename, 'w') as file: 
         file.write(course_to_student_map)
@@ -248,3 +279,11 @@ def save_timetable_details(app, timetable_name, all_data):
         file.write(data)
 
     return json.dumps({'success': True})
+
+
+
+# if __name__ == '__main__': 
+#     merge_list = """MT206 BCS-5A, MT205 BCS-7A, GG307 BCS-8B
+#     """
+#     print(fix_merged_course("MT205", "BCS-7A", merge_list))
+#     print("Running test")

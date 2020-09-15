@@ -46,21 +46,26 @@
                     </div>
                 </li>
                 <li class="nav-item active"><a class="nav-link" href="#"><button type="button"
-                            class="btn btn-sm btn-success" id='btn-refresh'><i class="fas fa-sync-alt"></i></button></a>
-                </li>
-                <li class="nav-item active"><a class="nav-link" href="#"><button type="button"
-                            class="btn btn-sm btn-primary" id='btn-check-clash'><i
-                                class="fas fa-times-circle"></i></button></a>
+                            class="btn btn-sm btn-success btn-only" id='btn-refresh'><i
+                                class="fas fa-sync-alt"></i></button></a>
                 </li>
                 <li class="nav-item active"><a class="nav-link" href="#">
-                        <button type="button" class="btn btn-sm btn-primary" id='btn-swap'><i
+                        <button type="button" class="btn btn-sm btn-primary btn-only" id='btn-swap'><i
                                 class="fas fa-arrows-alt-h"></i></button></a></li>
                 <li class="nav-item active"><a class="nav-link" href="#">
-                        <button type="button" class="btn btn-sm btn-primary" id='btn-insert'><i
+                        <button type="button" class="btn btn-sm btn-primary btn-only" id='btn-insert'><i
                                 class="fas fa-angle-double-down"></i></button></a></li>
                 <li class="nav-item active"><a class="nav-link" href="#">
-                        <button type="button" class="btn btn-sm btn-danger" id='btn-remove'><i
+                        <button type="button" class="btn btn-sm btn-danger btn-only" id='btn-remove'><i
                                 class="fas fa-minus-circle"></i></button></a></li>
+                <li class="nav-item active"><a class="nav-link" href="#"><button type="button"
+                            class="btn btn-sm btn-primary" id='btn-check-clash'><i class="fas fa-times-circle"></i><span
+                                class='nav-icon-label'>Clash</span></button></a>
+                </li>
+                <li class="nav-item active"><a class="nav-link" href="#"><button type="button"
+                            class="btn btn-sm btn-primary" id='btn-all-clashes'><i class="fas fa-project-diagram"></i><span
+                                class='nav-icon-label'>Review</span></button></a>
+                </li>
                 <li>
                     <div class="dropdown" id="search-leftover-dropdown">
                         <button class="btn btn-primary btn-sm dropdown-toggle" type="button"
@@ -77,7 +82,8 @@
                     <input class="form-control" autocomplete="off" id="filter-box" type="text" placeholder="Find ...">
                 </li>
                 <li class="nav-item active">
-                    <input class="form-control" autocomplete="off" id="student-filter-box" type="text" placeholder="Student ...">
+                    <input class="form-control" autocomplete="off" id="student-filter-box" type="text"
+                        placeholder="Student ...">
                 </li>
                 <li class="nav-item active">
                     <span id='alloc-id-selected'></span>
@@ -120,6 +126,13 @@
                             <label for="file_registered_students">Registered Students CSV</label>
                             <input type="file" class="form-control-file" id="file_registered_students"
                                 name='file_registered_students'>
+                        </div>
+
+                        <div class="form-group">
+                            <label for='txt_merge_list'>Merged Courses List (One per line)</label>
+                            <textarea type="text" class="form-control form-control-sm" id="txt_merge_list"
+                                name="txt_merge_list"
+                                placeholder="Enter merged courses list">AB111 BCS-5A, CD112 BCS-9B, CD332 BCS-9B1</textarea>
                         </div>
 
                         <div class="form-group">
@@ -195,7 +208,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    Saved! 
+                    Saved!
                 </div>
                 <!--div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -204,7 +217,7 @@
             </div>
         </div>
     </div>
-    
+
     <script>
 
   // gen_data();

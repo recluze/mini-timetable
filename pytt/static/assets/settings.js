@@ -10,7 +10,7 @@ slot_timings = ['8.00 - 9.30', '9.30 - 11.00', '11.00 - 12.30', '12.30 - 2.00', 
 
 all_ramaining_alloc_ids = []
 
-max_course_name_length = 20;
+max_course_name_length = 30;
 
 // data from the backend. Everything other than data is read only 
 timetable_name = ''

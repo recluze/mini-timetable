@@ -53,6 +53,18 @@
   border-bottom: 2px solid #339; 
 
 }
+.item.highlight-all-clashes {  
+  -webkit-box-shadow: 0px 0px 20px -6px rgba(1,0,0,0.75);
+  -moz-box-shadow: 0px 0px 20px -6px rgba(1,0,0,0.75);
+  box-shadow: 0px 0px 20px -6px orange;
+}
+.item.highlight-same-slot-teacher {  
+  /* -webkit-box-shadow: 0px 0px 20px -6px rgba(1,0,0,0.75);
+  -moz-box-shadow: 0px 0px 20px -6px rgba(1,0,0,0.75);
+  box-shadow: 0px 0px 20px -6px yellow; */
+  border-right: 3px solid red; 
+  border-left: 1px solid red; 
+}
 
 .btn-activated { 
   color: red;
@@ -161,8 +173,8 @@
 }
 
 #search-leftover-dropdown { 
-  x-margin-top: 0px;
-  margin-left: 20px; 
+  /* margin-left: 20px;  */
+
 }
 #search-leftover-dropdown > button { 
   margin-top: 8px;
@@ -213,6 +225,20 @@
   font-size: 0.6em;
 }
 
+nav li.nav-item .btn { 
+  width: 100px;
+  margin-left: -5px;
+  padding-top: 3px;
+}
+nav li.nav-item .btn-only { 
+  width: 40px;
+  padding-top: 3px;
+}
+.nav-icon-label { 
+  font-family: 'Fira Sans';
+  font-size: 0.9em;
+  padding-left: 15px;
+}
 
 /* filters and clash styles */ 
 .highlight-filter-box { 

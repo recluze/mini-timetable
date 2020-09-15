@@ -71,3 +71,73 @@ function check_clashes_for(alloc_id) {
     // now check teacher clashes as well 
     check_teacher_clash(alloc_id) 
 }
+
+
+
+function perform_all_chashes_check() { 
+    $(".highlight-all-clashes").removeClass("highlight-all-clashes"); 
+    $(".highlight-same-slot-teacher").removeClass("highlight-same-slot-teacher"); 
+
+    // go through all slots. If the slot in question has any clash in Day+Slot combo, highlight it. 
+    console.log("Starting check for all clashes ...");
+    for (var day_name in window.data) {
+        room_dict = window.data[day_name];
+        for (var room_name in room_dict) {
+            slot_dict = room_dict[room_name]; 
+            for(var slot_name in slot_dict) { 
+                alloc_box_id = make_alloc_box_id_str(day_name, room_name, slot_name)
+                alloc_id = slot_dict[slot_name]['id']; 
+                
+                if (alloc_id == ''){ 
+                    continue; // nothing allocated in this slot 
+                }
+
+                teacher_name = window.id_detail_mapping[alloc_id]['teacher_name'];
+
+                alloc_id = alloc_id.substring(0, alloc_id.length - 2);
+                
+                // console.log("Checking clashes for:", alloc_id, " in", alloc_box_id, " and teacher: ", teacher_name);
+                // first get clashes for this alloc_id 
+               
+                if (!(alloc_id in window.all_clashes)) { 
+                    console.log("Hnn, this guy does not have any clashes at all!", alloc_id); 
+                }
+
+                all_clashes_to_check = window.all_clashes[alloc_id]; 
+
+                for (var room_name_to_check in room_dict) {                    
+                    // my goodness! n^4 complexity! Good thing n is pretty small in even the largest of cases 
+
+                    // not looping over slots. We only need to check slot_id 
+                    slot_dict_to_check = room_dict[room_name_to_check]; 
+
+                    // we can skip if this slot isn't reserved at all 
+                    if (slot_name in slot_dict_to_check) { 
+                        alloc_id_to_check = slot_dict_to_check[slot_name]['id']; 
+                        if (alloc_id_to_check == ''){  
+                            // or maybe we have the key but is now blank because it was moved 
+                            continue; // nothing allocated in this slot 
+                        }
+
+                        // console.log("Checking if in clash:", alloc_id_to_check);
+
+                        teacher_name_to_check = window.id_detail_mapping[alloc_id_to_check]['teacher_name'];
+
+                        alloc_id_to_check = alloc_id_to_check.substring(0, alloc_id_to_check.length - 2);
+                        
+                        if (alloc_id_to_check in all_clashes_to_check) { 
+                            $("#" + alloc_box_id).addClass("highlight-all-clashes"); 
+                            // break; // still need to check the rest of the rooms for teacher clash 
+                        }
+
+                        // teacher check 
+                        if ((alloc_id != alloc_id_to_check) && (teacher_name_to_check == teacher_name)) { 
+                            console.log("Same teacher in:" + alloc_box_id + " and for:" + alloc_id_to_check)
+                            $("#" + alloc_box_id).addClass("highlight-same-slot-teacher"); 
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

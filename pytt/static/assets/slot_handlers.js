@@ -7,6 +7,17 @@ function get_alloc_id_from_box_id(alloc_box_id) {
 
 }
 
+function get_course_student_count(alloc_id) { 
+    // remove the suffix -1 and -2 
+    alloc_id = alloc_id.substring(0, alloc_id.length - 2)
+    console.log("Finding student count for:" + alloc_id);
+    if (alloc_id in window.course_to_student_map)  
+        return window.course_to_student_map[alloc_id].length
+    else 
+        return 0 
+}
+
+
 function find_all_remaining_alloc_ids() { 
     // reset it 
     window.all_remaining_alloc_ids = []; 
@@ -31,7 +42,8 @@ function find_all_remaining_alloc_ids() {
             course_name = all_details['course_name']; 
             // course_name = shorten_course_name(course_name); 
             teacher_name = all_details['teacher_name']; 
-            suffix = " [" + course_name + "] " + teacher_name; 
+            student_count = get_course_student_count(alloc_id);
+            suffix = " [" + course_name + "] " + teacher_name + " (" + student_count + ")"; 
             alloc_id_extended = alloc_id + suffix; 
             all_remaining_alloc_ids.push(alloc_id_extended); 
         }

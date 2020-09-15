@@ -62,6 +62,12 @@ $(function () {
     $("#btn-actions-new-timetable").click(function () {
         $('#modal-new-timetable').modal();
     });
+
+    $("#btn-all-clashes").click(function (e) {
+        e.preventDefault();
+        perform_all_chashes_check(); 
+    });
+
     $("#btn-actions-load-timetable").click(function () {
         $('#modal-load-timetable').modal();
     });
