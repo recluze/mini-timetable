@@ -1,3 +1,26 @@
+#main-container { 
+  padding-top: 60px; 
+}
+/* .item { 
+  height: 4.5em;
+  width: 160px;
+  font-family: fira mono; 
+  font-size: 0.6em;
+  border-bottom: 2px solid #ccc; 
+  border-left: 1px solid #eee;
+  border-right: 1px solid #eee; 
+  border-top: 1px solid #eee; 
+  margin: 1px; 
+  margin-left: 2px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  padding: 5px;
+  padding-bottom: 12px;
+  background-color: #f9f9f9;
+  position: relative;
+} */
+
+/* squished item */ 
 .item { 
   height: 4.5em;
   width: 160px;
@@ -16,6 +39,8 @@
   background-color: #f9f9f9;
   position: relative;
 }
+
+
 
 .item.shallower { 
   /* height: 3em; */ 
@@ -44,6 +69,7 @@
 .item .course-name { 
   clear: both; 
   width: 100%; 
+  margin-top: -5pt; 
   padding: 0 auto;
   font-size: 1em;
   text-align:center; 
@@ -169,6 +195,15 @@
   width: 100px;
 }
 
+#student-filter-box { 
+  font-family: 'Fira Mono';
+  padding-left: 10px; 
+  margin-top: 8px;
+  margin-left: 15px;
+  font-size: 0.8em;
+  width: 100px;
+}
+
 #alloc-id-selected { 
   display:block; 
   font-family: 'Fira Mono';
@@ -201,4 +236,10 @@
   font-size: 0.9em;
   opacity: 0.75;
   margin-top: -7px;
+  cursor: pointer;
+}
+
+.highlight-student-filter-box { 
+  background: #ecfade; 
+  border-bottom: 2px solid #008000; 
 }

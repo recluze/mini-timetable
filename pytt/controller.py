@@ -203,7 +203,7 @@ def load_timetable_data_details(app, timetable_name):
 
     # TODO: Fix this. Why is this hard coded. Save when it comes in from the form for new timetable 
     day_list = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    room_list = ['MehboobLab', 'KhyberLab', 'AbidiLab', 'Room6', 'Room8', 'Room9', 'Room10', 'Room11', 'Room12', 'HallA', 'HallB', 'CallLab', 'CommLab'];
+    room_list = ['MehboobLab', 'KhyberLab', 'AbidiLab', 'Room5', 'Room6', 'Room8', 'Room9', 'Room10', 'Room11', 'Room12', 'HallA', 'HallB', 'CallLab', 'CommLab'];
     slot_list = ['slot1', 'slot2', 'slot3', 'slot4', 'slot5', 'slot6', 'slot7'];
     slot_timings = ['8.00 - 9.30', '9.30 - 11.00', '11.00 - 12.30', '12.30 - 2.00', '2.00 - 3.30', '3.30 - 5.00', '5.00 - 6.30'] 
 

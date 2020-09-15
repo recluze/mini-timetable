@@ -12,18 +12,21 @@ $(function () {
         box_click_handler(this);
     });
     // swap function click handler 
-    $('#btn-swap').click(function () {
+    $('#btn-swap').click(function (e) {
+        e.preventDefault();
         // $(this).find('i.fa-heart').css('color', '#f7296a');
         swap_button_click_handler();
     });
-    $('#btn-refresh').click(function () {
+    $('#btn-refresh').click(function (e) {
+        e.preventDefault();
         // $(this).find('i.fa-heart').css('color', '#f7296a');
         refresh_button_click_handler();
     });
 
 
     // setup the rest of the UI 
-    $("#search-leftover-courses-box").on("keyup", function () {
+    $("#search-leftover-courses-box").on("keyup", function (e) {
+        e.preventDefault();
         var value = $(this).val().toLowerCase();
         $(".dropdown-menu li").filter(function () {
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
@@ -34,15 +37,25 @@ $(function () {
         highlight_filter_box_term();
     });
 
-    $("#btn-insert").click(function () {
+    $("#student-filter-box").on('keypress',function(e) {
+        // e.preventDefault();
+        if(e.which == 13) {
+            highlight_student_filter_box_term();
+        }
+    });
+
+    $("#btn-insert").click(function (e) {
+        e.preventDefault();
         insert_from_remaining_handler();
     });
 
-    $("#btn-remove").click(function () {
+    $("#btn-remove").click(function (e) {
+        e.preventDefault();
         remove_selected_handler();
     });
 
-    $("#btn-check-clash").click(function () {
+    $("#btn-check-clash").click(function (e) {
+        e.preventDefault();
         check_clash_handler();
     });
 

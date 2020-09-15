@@ -1,6 +1,7 @@
 /* Event thandlers */ 
 function update_event_handlers() { 
-    $(".remaining-selected").click(function () {
+    $(".remaining-selected").click(function (e) {
+        e.preventDefault(); 
         remaining_selected_click_handler(this); 
     });
 }
@@ -50,8 +51,15 @@ function refresh_button_click_handler() {
 
     // clear filter box stuff 
     $("#filter-box").val(''); 
-    highlight_filter_box_term(); 
+    
+    $(".in-clash-teacher").removeClass('in-clash-teacher'); 
+    $(".in-clash-student").removeClass('in-clash-student'); 
 
+    // remove badges 
+    $('.clash-count').text(''); 
+    $('.clash-count').hide(); 
+
+    highlight_filter_box_term(); 
 }
 
 function highlight_filter_box_term() { 
@@ -84,6 +92,33 @@ function highlight_filter_box_term() {
         // console.log(alloc_box_id); 
         if (alloc_box_id) { 
             $("#" + alloc_box_id).addClass("highlight-filter-box"); 
+        }
+    }
+}
+
+function highlight_student_filter_box_term() { 
+    $(".highlight-student-filter-box").removeClass("highlight-student-filter-box"); 
+    var term = $("#student-filter-box").val().toUpperCase();
+    if(term == "") return; 
+
+    console.log("Searching for student:", term); 
+    
+    if (term in window.student_to_course_map) { 
+        student_courses = window.student_to_course_map[term]['courses']; 
+        
+        for (var course_idx in student_courses) { 
+            alloc_id = student_courses[course_idx];
+            variants = [alloc_id + "-1", alloc_id + "-2"]; 
+
+            for (var idx in variants) { 
+                alloc_id_x = variants[idx]; 
+
+                alloc_box_id = find_alloc_box_for_alloc_id(alloc_id_x); 
+                if (alloc_box_id == ''){ 
+                    continue; 
+                }
+                $('#' + alloc_box_id).addClass('highlight-student-filter-box'); 
+            }
         }
     }
 
