@@ -253,7 +253,6 @@ def load_timetable_data_details(app, timetable_name):
     room_list = meta_data_details['rooms_list'] 
     slot_timings = meta_data_details['slots_list']
     slot_list = ['slot' + str(i+1) for i in range(len(slot_timings))]
-    slot_list = ['slot1', 'slot2', 'slot3', 'slot4', 'slot5', 'slot6', 'slot7'];
 
 
 
@@ -292,6 +291,7 @@ def save_timetable_details(app, timetable_name, all_data):
     course_to_student_map = all_data['course_to_student_map']
     clash_details = all_data['all_clashes']
 
+    # TODO: Write the rest as well! Or Not? Think about it 
     with open(data_filename, 'w') as file: 
         file.write(data)
 
