@@ -9,7 +9,7 @@ from pytt.controller import save_timetable_details
 
 from pytt.preferences import make_preferences_page
 from pytt.export import export_timetable
-
+from pytt.generation import suggest_slots_for_level
 
 from flask.logging import default_handler
 
@@ -25,14 +25,27 @@ def timetable_page():
     return render_template('index.html') 
 
 
-@app.route('/set_preferences')
+@app.route('/set_preferences', methods = ['GET', 'POST'])
 def set_preferences():
-    return make_preferences_page()
+    timetable_name = request.args.get('timetable_name', '')
+    if timetable_name == '': 
+        return 'Need a timetable name...'
+    return make_preferences_page(timetable_name, request.form, app)
+
+@app.route('/suggest_slots') 
+def suggest_slots(): 
+    timetable_name = request.args.get('timetable_name', '')
+    level = request.args.get('level', '')
+    if timetable_name == '': 
+        return "{error: 'Need a timetable name...'}" 
+
+    return suggest_slots_for_level(timetable_name, level, app)
 
 @app.route('/export')
 def export(): 
     timetable_name = request.args.get('timetable_name')
-    return export_timetable(timetable_name, app) 
+    filter_text = request.args.get('filter_text', '')
+    return export_timetable(timetable_name, filter_text, app) 
 
 @app.route('/new_timetable', methods = ['GET', 'POST'])
 def new_timetable_request():
@@ -72,9 +85,21 @@ def new_timetable_request():
 
 @app.route('/get_timetables_list')
 def get_timetables_list():
-    return json.dumps([
-        {'name': 'Fall-2020-v0', 'modified_date': 'x'}
-    ])
+    import glob, datetime
+    dir_to_search = os.path.join(app.instance_path, app.config['UPLOAD_FOLDER'])
+
+    all_timetables = []
+    for name in glob.glob(dir_to_search + '/*-meta-data.json'):
+        mod_date = os.stat(name).st_mtime
+        mod_date = datetime.datetime.fromtimestamp(mod_date).strftime('%Y-%m-%d %H:%M:%S')
+
+        this_timetable_name = os.path.basename(name)
+        this_timetable_name = this_timetable_name[:-1*len("-meta-data.json")]
+        app.logger.info(this_timetable_name)
+
+        this_entry = {'name': this_timetable_name, 'modified_date': mod_date} 
+        all_timetables.append(this_entry)
+    return json.dumps(all_timetables)
 
 
 @app.route('/load_timetable')

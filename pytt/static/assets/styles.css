@@ -117,7 +117,7 @@
   background-color: #dcdcdf;
   opacity: 0.8;
   font-weight: 400;
-  font-size: 0.6em;
+  font-size: 1em;
   padding-left: 90px; 
   margin-left: -100px; 
   margin-bottom: 5px;
@@ -268,4 +268,37 @@ nav li.nav-item .btn-only {
 .highlight-student-filter-box { 
   background: #ecfade; 
   border-bottom: 2px solid #008000; 
+}
+
+
+
+
+
+/* set preferences form styles */ 
+.preferences-form label { 
+  font-family: 'Fira Mono';
+  padding-right: 10px;
+  width: 500px;
+  font-size: 0.8em;
+  /* border: 1px solid black; */
+  clear: both; 
+  text-align: right; 
+  /* height: 2.2em; */
+  padding-top:3px;
+  float: left;
+}
+.preferences-form input { 
+  width: 200px;
+  height: 2em;
+  font-size: 0.8em;
+  /* border: 1px solid black; */
+  float: left;
+}
+
+#btn-save-pref { 
+  clear: both; 
+  float: left; 
+  margin-left: 500px; 
+  margin-bottom: 20px;
+  font-family: 'Fira Mono';
 }

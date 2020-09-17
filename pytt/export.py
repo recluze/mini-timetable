@@ -66,7 +66,7 @@ def draw_header(story):
     story.append(head) 
 
 
-def generate_data_for_all_days(app, from_directory, timetable_name): 
+def generate_data_for_all_days(app, from_directory, timetable_name, filter_text): 
     # read data, meta_data and id_detail_mapping_filename
     data_filename = os.path.join(from_directory, timetable_name + "-data.json")
     id_detail_mapping_filename = os.path.join(from_directory, timetable_name + "-id_detail_mapping.json")
@@ -95,7 +95,7 @@ def generate_data_for_all_days(app, from_directory, timetable_name):
     # app.logger.info(day_list)
     # app.logger.info(room_list)
     # app.logger.info(slot_list)
-    app.logger.info(id_detail_mapping)
+    # app.logger.info(id_detail_mapping)
 
     style_normal = ParagraphStyle(
         name='Normal',
@@ -105,6 +105,7 @@ def generate_data_for_all_days(app, from_directory, timetable_name):
     style_mini = ParagraphStyle(
         name='Normal',
         fontName='FiraSans',
+        alignment=TA_RIGHT,
         fontSize=5,
     )
     style_mini_centered = ParagraphStyle(
@@ -149,18 +150,24 @@ def generate_data_for_all_days(app, from_directory, timetable_name):
 
                     alloc_id = alloc_id[:-2]
                     slot_details = course_code + " " + class_section + "&nbsp;&nbsp;&nbsp; [" + teacher_name + "]<br/><b>" + course_name + "</b>"
-                    found_some_slot = True 
-
+    
                 else: 
                     slot_details = ''
 
-                room_data.append(Paragraph(slot_details, style=style_normal))
-            
+        
+                # filter_text only has effect if it is set. We do it like this because we want to avoid 
+                # filling the tables with blank cells 
+                if (filter_text == '' and ' ' in slot_details) or (filter_text != '' and filter_text in slot_details): 
+                    found_some_slot = True 
+                    room_data.append(Paragraph(slot_details, style=style_normal))
+                else: 
+                    room_data.append(Paragraph('', style=style_normal))
+
             # omit rows which don't have anything scheudled 
             if found_some_slot: 
                 day_data.append(room_data)
         data.append(day_data)
-    app.logger.info(data)
+    # app.logger.info(data)
     return data, day_list
 
 
@@ -237,7 +244,7 @@ def generate_pdf_output(output_directory, filename, data, day_list, app):
 
 
 
-def export_timetable(timetable_name, app): 
+def export_timetable(timetable_name, filter_text, app): 
     set_fonts() # need to do this first since paragraph creation needs it 
 
     from_directory = os.path.join(app.instance_path, app.config['UPLOAD_FOLDER'])
@@ -246,7 +253,7 @@ def export_timetable(timetable_name, app):
     exported_filename = timetable_name + "-" + timestamp + ".pdf"
     app.logger.info("Exporting to PDF: " + exported_filename)
 
-    data, day_list = generate_data_for_all_days(app, from_directory, timetable_name)
+    data, day_list = generate_data_for_all_days(app, from_directory, timetable_name, filter_text)
     generate_pdf_output(output_directory, exported_filename, data, day_list, app) 
 
     app.logger.info("Exporting PDF file from:" + from_directory)
