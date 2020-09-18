@@ -55,6 +55,7 @@ def find_clash_free_slot(course_id, free_slots, data, all_clashes, meta_data, co
 
     # TODO: Wednesday slot3 is for no one. We need to make this not hard coded 
     slots_available = remove_slots_for_match(slots_available, 'Wednesday', 'slot3')
+    slots_available = remove_slots_for_match(slots_available, 'Friday', 'slot4')
 
     # TODO: remove stuff not matching something particular. e.g. not matching 'Lab' for CL courses 
 
@@ -63,17 +64,17 @@ def find_clash_free_slot(course_id, free_slots, data, all_clashes, meta_data, co
     class_to_check = course_id_clipped + "-" + suffix
     day_to_remove = get_class_day_room_slot(class_to_check, data, meta_data)
     if day_to_remove is not None: 
-        app.logger.info("Removing day from available slots: " + day_to_remove[0])
+        # app.logger.info("Removing day from available slots: " + day_to_remove[0])
         slots_available = remove_slots_for_match(slots_available, day_to_remove[0], '')
         # app.logger.info(slots_available)
 
     # remove from slots_available: same slot as a teacher's slot 
     teacher_name = course_teacher_map[course_id[0]]
     all_teacher_courses = teacher_course_map[teacher_name]
-    app.logger.info("Removing slots for: " + str(all_teacher_courses))
+    # app.logger.info("Removing slots for: " + str(all_teacher_courses))
     for course in all_teacher_courses: 
         slot_to_remove = get_class_day_room_slot(course, data, meta_data)
-        app.logger.info("Found slot to remove for " + course + " : " + str(slot_to_remove))
+        # app.logger.info("Found slot to remove for " + course + " : " + str(slot_to_remove))
         if slot_to_remove is not None: 
             slots_available = remove_slots_for_match(slots_available, slot_to_remove[0], slot_to_remove[2])
             # app.logger.info(slots_available)
@@ -85,7 +86,7 @@ def find_clash_free_slot(course_id, free_slots, data, all_clashes, meta_data, co
             for suffix in '1', '2': 
                 check_for_course = clashing_course + "-" + suffix 
                 slot_to_remove = get_class_day_room_slot(check_for_course, data, meta_data)
-                app.logger.info("Found slot to remove for clashing course: " + check_for_course + " : " + str(slot_to_remove))
+                # app.logger.info("Found slot to remove for clashing course: " + check_for_course + " : " + str(slot_to_remove))
                 if slot_to_remove is not None: 
                     slots_available = remove_slots_for_match(slots_available, slot_to_remove[0], slot_to_remove[2])
                     # app.logger.info(slots_available)
@@ -105,7 +106,7 @@ def find_clash_free_slot(course_id, free_slots, data, all_clashes, meta_data, co
 def fit_courses_to_slots(data, courses_to_fit, free_slots, all_clashes, meta_data, course_teacher_map, teacher_course_map, app): 
     app.logger.info("Fitting ... ") 
     app.logger.info(" - Number of courses: " + str(len(courses_to_fit)))
-    app.logger.info(" - Number of slot: " + str(len(free_slots)))
+    app.logger.info(" - Number of slots: " + str(len(free_slots)))
     
     
     all_variations = []
@@ -239,7 +240,22 @@ def suggest_slots_for_level(timetable_name, level, app):
     course_teacher_map, teacher_course_map = get_teacher_maps(id_detail_mapping)
     fit_map = fit_courses_to_slots(data, courses_to_place, free_slots, all_clashes, meta_data, course_teacher_map, teacher_course_map, app)
 
-    # TODO: Sanity check: no two suggested slots should be the same! 
+   
+    if sanity_check(fit_map, app): 
+        return json.dumps(fit_map)    
+    else: 
+        return '{error: Something went wrong! Sanity check failed!}'
 
-    app.logger.info(fit_map)
-    return json.dumps(fit_map)
+  
+
+def sanity_check(fit_map, app): 
+    # app.logger.info(fit_map)
+    courses_fit_map = fit_map['fit_map']
+
+    slots = courses_fit_map.values() 
+    app.logger.info("Total number of slots: " + str(len(slots)))
+    app.logger.info("Couldn't fit: " + str(len(fit_map['cannot_fit'])))
+    if len(slots) != len(set(slots)): 
+        return False
+
+    return True 
