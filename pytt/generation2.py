@@ -1,7 +1,6 @@
 import os 
 import json 
 import copy
-import random
 
 def calculate_fitness(data, cannot_fit_courses, app): 
     pass 
@@ -20,28 +19,19 @@ def place_in_slot(data, day, room, slot, alloc_id):
 
 
 
-def get_class_day_room_slot(class_to_check, data, meta_data): 
-    day_list = meta_data['days_list']
-    room_list = meta_data['rooms_list']
-    slot_timings = meta_data['slots_list']
+def check_if_room_in_clash(data, course_clashes, day, room, slot, app): 
+    try: 
+        subject_in_room = data[day][room][slot]['id'][:-2]  # clip away the 
+        if subject_in_room in course_clashes: 
+            app.logger.info(" .. in clash")
+            return True 
+        else: 
+            return False
+    except KeyError: 
+        return False # since nothing in data for this slot, we're ok 
 
-    slot_list = ['slot' + str(i+1) for i in range(len(slot_timings))]
-
-    for day in day_list: 
-        for room in room_list: 
-            for slot in slot_list: 
-                try: 
-                    if data[day][room][slot]['id'] == class_to_check: 
-                        return day, room, slot 
-                except KeyError: 
-                    pass 
-    return None 
-
-
-def remove_slots_for_match(free_slots, match1, match2): 
-    return [item for item in free_slots if not (match1 in item and match2 in item)]
-
-def find_clash_free_slot(course_id, free_slots, data, all_clashes, meta_data, course_teacher_map, teacher_course_map, app): 
+        
+def find_clash_free_slot(course_id, free_slots, data, all_clashes, meta_data, app): 
     room_list = meta_data['rooms_list']
 
     app.logger.info("Finding free slot for: " + str(course_id))
@@ -49,64 +39,38 @@ def find_clash_free_slot(course_id, free_slots, data, all_clashes, meta_data, co
     # find all clashes for this course 
     # app.logger.info(free_slots)
     course_clashes = list(all_clashes[course_id_clipped].keys())
-    # app.logger.info("Course clashes: " + str(course_clashes))
+    app.logger.info("Course clashes: " + str(course_clashes))
     
-    slots_available = free_slots[:]
 
-    # TODO: Wednesday slot3 is for no one. We need to make this not hard coded 
-    slots_available = remove_slots_for_match(slots_available, 'Wednesday', 'slot3')
+    # TODO: fix this. We're currently hard coding no placement in Wed 11.00 clock slot. We can define this as custom rules  
+    # for each 
 
-    # TODO: remove stuff not matching something particular. e.g. not matching 'Lab' for CL courses 
+    # pick first free slot, see if it will lead to clash if so, pick next, repeat 
+    for free_slot in free_slots: 
+        is_slot_ok = True 
 
-    # remove from slots_available: same day as another class of same subject 
-    suffix = '2' if course_id[0][-1] == '1' else '1' 
-    class_to_check = course_id_clipped + "-" + suffix
-    day_to_remove = get_class_day_room_slot(class_to_check, data, meta_data)
-    if day_to_remove is not None: 
-        app.logger.info("Removing day from available slots: " + day_to_remove[0])
-        slots_available = remove_slots_for_match(slots_available, day_to_remove[0], '')
-        # app.logger.info(slots_available)
+        try_day, try_room, try_slot = free_slot.split('-')
+        app.logger.info("Trying slot:" + ' '.join([try_day, try_room, try_slot]))
+        # check all rooms in this slot 
 
-    # remove from slots_available: same slot as a teacher's slot 
-    teacher_name = course_teacher_map[course_id[0]]
-    all_teacher_courses = teacher_course_map[teacher_name]
-    app.logger.info("Removing slots for: " + str(all_teacher_courses))
-    for course in all_teacher_courses: 
-        slot_to_remove = get_class_day_room_slot(course, data, meta_data)
-        app.logger.info("Found slot to remove for " + course + " : " + str(slot_to_remove))
-        if slot_to_remove is not None: 
-            slots_available = remove_slots_for_match(slots_available, slot_to_remove[0], slot_to_remove[2])
-            # app.logger.info(slots_available)
+        for check_room in room_list: 
+            app.logger.info("Checking room for clash:" + check_room)
+            if check_if_room_in_clash(data, course_clashes, try_day, check_room, try_slot, app): 
+                is_slot_ok = False 
+                break # no need to check further 
 
-    # remove from slots_available: same slot as clashing courses 
-    try: 
-        course_clashes = all_clashes[course_id_clipped].keys()
-        for clashing_course in course_clashes: 
-            for suffix in '1', '2': 
-                check_for_course = clashing_course + "-" + suffix 
-                slot_to_remove = get_class_day_room_slot(check_for_course, data, meta_data)
-                app.logger.info("Found slot to remove for clashing course: " + check_for_course + " : " + str(slot_to_remove))
-                if slot_to_remove is not None: 
-                    slots_available = remove_slots_for_match(slots_available, slot_to_remove[0], slot_to_remove[2])
-                    # app.logger.info(slots_available)
-    except KeyError: 
-        pass  # if no clash is found, we're good anyway! 
-
-    # remove from slots_available: pick a random slot from the remaining 
-    if len(slots_available) > 1: 
-        app.logger.info("Picking random value from: " + str(len(slots_available)))
-        slot_picked = random.choice(slots_available)
-        app.logger.info("Picked: " + slot_picked)
-        return slot_picked 
+        if is_slot_ok: 
+            return free_slot 
            
     # for lab courses, check if "next slot" is also free
     return None 
 
-def fit_courses_to_slots(data, courses_to_fit, free_slots, all_clashes, meta_data, course_teacher_map, teacher_course_map, app): 
+def fit_courses_to_slots(data, courses_to_fit, free_slots, all_clashes, meta_data, app): 
     app.logger.info("Fitting ... ") 
     app.logger.info(" - Number of courses: " + str(len(courses_to_fit)))
     app.logger.info(" - Number of slot: " + str(len(free_slots)))
     
+    return {} 
     
     all_variations = []
     num_variations = 1
@@ -119,7 +83,7 @@ def fit_courses_to_slots(data, courses_to_fit, free_slots, all_clashes, meta_dat
 
         # go through each course. Find clash-free slot and place it there 
         for course_id in courses_to_fit: 
-            slot_id = find_clash_free_slot(course_id, free_slots, temp_data, all_clashes, meta_data, course_teacher_map, teacher_course_map, app)
+            slot_id = find_clash_free_slot(course_id, free_slots, temp_data, all_clashes, meta_data, app)
         
             if slot_id is None: 
                 app.logger.info("Cannot fit course clash free ... ")
@@ -143,25 +107,8 @@ def fit_courses_to_slots(data, courses_to_fit, free_slots, all_clashes, meta_dat
 
 
 
-def get_teacher_maps(id_detail_mapping): 
-    course_teacher_map = {} 
-    teacher_course_map = {} 
-    for course_id, details in id_detail_mapping.items(): 
-        teacher_name = details['teacher_name']
-        course_teacher_map[course_id] = teacher_name
-
-        if teacher_name in teacher_course_map: 
-            teacher_course_map[teacher_name].append(course_id)
-        else: 
-            teacher_course_map[teacher_name] = [course_id]
-    return course_teacher_map, teacher_course_map
-
-
-
-
-
 def get_course_slot_map(data, meta_data, app):
-    # app.logger.info(meta_data.keys())
+    app.logger.info(meta_data.keys())
     day_list = meta_data['days_list']
     room_list = meta_data['rooms_list']
     slot_timings = meta_data['slots_list']
@@ -171,7 +118,7 @@ def get_course_slot_map(data, meta_data, app):
     day_list = day_list[:5]
 
     slot_list = ['slot' + str(i+1) for i in range(len(slot_timings))]
-    # app.logger.info(slot_list)
+    app.logger.info(slot_list)
 
     course_slot_map = {} 
     free_slots = []
@@ -180,12 +127,10 @@ def get_course_slot_map(data, meta_data, app):
         for room in room_list: 
             for slot in slot_list: 
                 try: 
-                    
                     full_slot_name = day + "-" + room + "-" + slot
                     alloc_id = data[day][room][slot]['id']
 
                     if alloc_id == '': 
-    
                         free_slots.append(full_slot_name) # it's free, just record that 
                         continue
 
@@ -236,10 +181,7 @@ def suggest_slots_for_level(timetable_name, level, app):
                 courses_to_place.append((course_id_suffix_2, pref_level))
     
 
-    course_teacher_map, teacher_course_map = get_teacher_maps(id_detail_mapping)
-    fit_map = fit_courses_to_slots(data, courses_to_place, free_slots, all_clashes, meta_data, course_teacher_map, teacher_course_map, app)
-
-    # TODO: Sanity check: no two suggested slots should be the same! 
+    fit_map = fit_courses_to_slots(data, courses_to_place, free_slots, all_clashes, meta_data, app)
 
     app.logger.info(fit_map)
     return json.dumps(fit_map)

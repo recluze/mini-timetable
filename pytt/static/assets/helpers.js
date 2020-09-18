@@ -163,13 +163,9 @@ $(function () {
         e.preventDefault();
         get_automated_suggestions();
     });
-    $("#btn-close-suggestions").click(function (e) {
-        e.preventDefault();
-        $("#suggestion-container").hide();
-    });
     $("#btn-open-suggestions").click(function (e) {
         e.preventDefault();
-        $("#suggestion-container").show();
+        $("#suggestion-container").toggle();
     });
 
 

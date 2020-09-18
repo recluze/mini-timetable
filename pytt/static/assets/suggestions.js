@@ -87,15 +87,11 @@ function get_automated_suggestions() {
             response = $.parseJSON(data);
             // console.log(response); 
             populate_suggestions_box(response)
+            // end the loading thingy after showing the box 
+            $("#suggestion-container").show(); 
+            $("#suggestion-container").css('z-index', 99999999);
+            $("#suggestion-container").css('position', 'absolute');
+            $("#top-loading-text").hide(); 
         }
     }); 
-
-
-
-
-    // end the loading thingy after showing the box 
-    $("#suggestion-container").show(); 
-    $("#suggestion-container").css('z-index', 99999999);
-    $("#suggestion-container").css('position', 'absolute');
-    $("#top-loading-text").hide(); 
 }

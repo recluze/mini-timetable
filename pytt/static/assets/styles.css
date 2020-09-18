@@ -217,18 +217,24 @@
 }
 
 #alloc-id-selected { 
-  display:block; 
   font-family: 'Fira Mono';
   padding-left: 2px; 
-  margin-top: 20px;
-  margin-left: 25px;
+  margin-top: 9px;
+  margin-left: 10px;
   font-size: 0.6em;
+  height: 32px; 
+  display: flex;
+  align-items: center;
 }
+
 
 nav li.nav-item .btn { 
   width: 100px;
-  margin-left: -5px;
+  margin-left: -7px;
   padding-top: 3px;
+  padding-left: 0px; 
+  padding-right: 0px;
+  margin-right: -5px;
 }
 nav li.nav-item .btn-only { 
   width: 40px;
@@ -311,7 +317,7 @@ nav li.nav-item .btn-only {
   font-family: 'Fira Mono';
   padding-left: 10px; 
   margin-top: 8px;
-  margin-left: 15px;
+  margin-left: 0px;
   font-size: 0.8em;
   width: 40px;
   height:2.35em;
@@ -321,6 +327,8 @@ nav li.nav-item .btn-only {
   position: aboslute;
   top: 60px; 
   right: 0; 
+  height: 200px; 
+  overflow: scroll; 
   background: white;
   border: 1px solid #ccc; 
   /* border-top: none; */
