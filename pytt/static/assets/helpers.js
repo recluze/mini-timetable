@@ -163,6 +163,10 @@ $(function () {
         e.preventDefault();
         get_automated_suggestions();
     });
+    $("#btn-place-all-suggestions").click(function (e) {
+        e.preventDefault();
+        place_all_suggestions();
+    });
     $("#btn-open-suggestions").click(function (e) {
         e.preventDefault();
         $("#suggestion-container").toggle();

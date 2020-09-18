@@ -1,3 +1,15 @@
+
+function place_all_suggestions() { 
+    console.log("Placing all suggestions ... ");
+    alloc_id = $("#suggestions-table tr .btn-place").each(function (index) { 
+        process_suggestion_place_button(this);
+    });
+    
+    // first().children().eq(0).text()
+    // alloc_box_id = $("#suggestions-table tr").first().children().eq(1).text()
+    // console.log("Placing: ", alloc_id, " in ", alloc_box_id);
+}
+
 function process_suggestion_place_button(btn) { 
     alloc_id = $(btn).parent().siblings().eq(0).text()
     alloc_box_id = $(btn).parent().siblings().eq(1).text()
@@ -6,10 +18,10 @@ function process_suggestion_place_button(btn) {
     // update GUI 
     populate_alloc_box(alloc_box_id, alloc_id); 
     // make sure you also update backend data 
-    update_record_of_alloc_id(alloc_box_id, alloc_id);  
+    update_record_of_alloc_id(alloc_box_id, alloc_id); 
+    
     // also update the remaining list 
     find_all_remaining_alloc_ids(); 
-
     // remove this row since it's placed 
     // btn -> td -> tr 
     $(btn).parent().parent().remove(); 

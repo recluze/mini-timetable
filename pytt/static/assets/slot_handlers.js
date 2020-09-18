@@ -10,7 +10,7 @@ function get_alloc_id_from_box_id(alloc_box_id) {
 function get_course_student_count(alloc_id) { 
     // remove the suffix -1 and -2 
     alloc_id = alloc_id.substring(0, alloc_id.length - 2)
-    console.log("Finding student count for:" + alloc_id);
+    // console.log("Finding student count for:" + alloc_id);
     if (alloc_id in window.course_to_student_map)  
         return window.course_to_student_map[alloc_id].length
     else 
@@ -123,7 +123,7 @@ function update_record_of_alloc_id(alloc_box_id, alloc_id) {
     if (alloc_id != '') { 
         // first remove alloc_id from whereever it was 
         old_alloc_box_id = find_alloc_box_for_alloc_id(alloc_id, true); 
-        console.log(window.data);
+        // console.log(window.data);
         // then put it in the new place  
         console.log("Updating backend data for: ", alloc_box_id, alloc_id );
 
@@ -140,9 +140,9 @@ function update_record_of_alloc_id(alloc_box_id, alloc_id) {
         if (!(slot_name in window.data[day_name][room_name]))
             window.data[day_name][room_name][slot_name] = {}; 
         
-        console.log(window.data[day_name][room_name]);
+        // console.log(window.data[day_name][room_name]);
         window.data[day_name][room_name][slot_name]['id'] = alloc_id; 
-        console.log(window.data);
+        // console.log(window.data);
     } 
 }
 
