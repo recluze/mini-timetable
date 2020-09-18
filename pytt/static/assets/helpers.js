@@ -37,9 +37,9 @@ $(function () {
         highlight_filter_box_term();
     });
 
-    $("#student-filter-box").on('keypress',function(e) {
+    $("#student-filter-box").on('keypress', function (e) {
         // e.preventDefault();
-        if(e.which == 13) {
+        if (e.which == 13) {
             highlight_student_filter_box_term();
         }
     });
@@ -65,7 +65,7 @@ $(function () {
 
     $("#btn-all-clashes").click(function (e) {
         e.preventDefault();
-        perform_all_chashes_check(); 
+        perform_all_chashes_check();
     });
 
     $("#btn-actions-load-timetable").click(function () {
@@ -73,9 +73,9 @@ $(function () {
     });
 
     $('#modal-load-timetable').on('shown.bs.modal', function (e) {
-        console.log("Loading past timetables"); 
+        console.log("Loading past timetables");
         // remove past records 
-        $("#load-timetables-list").find("tr:gt(0)").remove(); 
+        $("#load-timetables-list").find("tr:gt(0)").remove();
 
         // now load afresh 
         $.ajax({
@@ -83,54 +83,54 @@ $(function () {
             url: '/get_timetables_list',
             success: function (data) {
                 response = $.parseJSON(data);
-                console.log(response); 
-                $(function() {
-                    $.each(response, function(i, item) {
+                console.log(response);
+                $(function () {
+                    $.each(response, function (i, item) {
                         var $tr = $('<tr>').append(
                             $('<td>').text(item.name),
                             $('<td>').text(item.modified_date),
-                            $('<td>').append( 
+                            $('<td>').append(
                                 $('<button/>', {
-                                    text: 'Load', 
+                                    text: 'Load',
                                     class: 'btn btn-sm btn-danger',
-                                    click: function() { load_timetable(item.name); }
-                                }) 
+                                    click: function () { load_timetable(item.name); }
+                                })
                             )
                         ); //.appendTo('#records_table');
                         // console.log($tr.wrap('<p>').html());
-                        $("#load-timetables-list").append($tr); 
+                        $("#load-timetables-list").append($tr);
                     });
                 });
             }
         });
-    }); 
+    });
 
-    
+
     $('#btn-actions-save-timetable').click(function () {
-        console.log("Saving timetable current version."); 
-        
+        console.log("Saving timetable current version.");
+
         $.ajax({
             type: "POST",
             url: '/save_timetable',
-            data: { 
-                'timetable_name': window.timetable_name, 
-                'alloc_data': JSON.stringify(window.data), 
+            data: {
+                'timetable_name': window.timetable_name,
+                'alloc_data': JSON.stringify(window.data),
                 'id_detail_mapping': JSON.stringify(window.id_detail_mapping),
                 'student_to_course_map': JSON.stringify(window.student_to_course_map),
                 'course_to_student_map': JSON.stringify(window.course_to_student_map),
-                'all_clashes': JSON.stringify(window.all_clashes)  
-            }, 
+                'all_clashes': JSON.stringify(window.all_clashes)
+            },
             success: function (data) {
                 response = $.parseJSON(data);
-                if (response['success']) { 
-                        $("#alert-box").modal();
-                } else { 
+                if (response['success']) {
+                    $("#alert-box").modal();
+                } else {
 
                 }
-                console.log(response); 
+                console.log(response);
             }
         });
-    }); 
+    });
 
     /*
     $("#frm-new-timetable").submit(function (event) {
@@ -152,10 +152,41 @@ $(function () {
         });
 
     });
-    */ 
+    */
 
 
     // update all dynamic event handlers 
     update_event_handlers();
 
+
+    $("#btn-suggest-placement").click(function (e) {
+        e.preventDefault();
+        get_automated_suggestions();
+    });
+    $("#btn-close-suggestions").click(function (e) {
+        e.preventDefault();
+        $("#suggestion-container").hide();
+    });
+    $("#btn-open-suggestions").click(function (e) {
+        e.preventDefault();
+        $("#suggestion-container").show();
+    });
+
+
+
+
+    /* keypress shortcuts */
+    $(window).keydown(function (e) {
+        // w is 87, r is 82 Get more from https://keycode.info/
+        if (e.ctrlKey && e.which == 87) {
+            e.preventDefault();
+            $('#btn-swap').trigger("click");
+        } else if (e.ctrlKey && e.which == 82) {
+            e.preventDefault();
+            $('#btn-remove').trigger("click");
+        } else if (e.ctrlKey && e.which == 76) {
+            e.preventDefault();
+            $('#btn-check-clash').trigger("click");
+        }
+    });
 });

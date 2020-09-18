@@ -63,7 +63,8 @@
                                 class='nav-icon-label'>Clash</span></button></a>
                 </li>
                 <li class="nav-item active"><a class="nav-link" href="#"><button type="button"
-                            class="btn btn-sm btn-primary" id='btn-all-clashes'><i class="fas fa-project-diagram"></i><span
+                            class="btn btn-sm btn-primary" id='btn-all-clashes'><i
+                                class="fas fa-project-diagram"></i><span
                                 class='nav-icon-label'>Review</span></button></a>
                 </li>
                 <li>
@@ -90,13 +91,43 @@
                 </li>
             </ul>
         </div>
+        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <div id='top-loading-text'>Loading ... </div></a>
+                </li>
+                <li class="nav-item active">
+                    <input class="form-control" autocomplete="off" id="suggest-placement-box" type="text"
+                        placeholder="5">
+                </li>
+                <li class="nav-item active"><a class="nav-link" href="#"><button type="button"
+                            class="btn btn-sm btn-secondary btn-only" id='btn-suggest-placement'><i
+                                class="fas fa-comment-dots"></i></button></a>
+                </li>
+                <li class="nav-item active"><a class="nav-link" href="#"><button type="button"
+                            class="btn btn-sm btn-secondary btn-only" id='btn-open-suggestions'><i
+                                class="fas fa-book-open"></i></button></a>
+                </li>
+            </ul>
+        </div>
     </nav>
 
     <div id="main-container" class="container" style='min-width: 10000px'>
         <!-- populated dynamically. go away! -->
     </div>
 
-
+    <div id="suggestion-container" style="display: none">
+        <table class="table table-sm" id='suggestions-table'>
+            <tr>
+                <th>Course</th>
+                <th>Suggestion</th>
+                <th><a class="btn btn-primary btn-sm" href="#" role="button"><i
+                            class="fas fa-angle-double-down"></i></a>
+                    <a class="btn btn-primary btn-sm" id='btn-close-suggestions' href="#" role="button"><i
+                            class="fas fa-times"></i></a></th>
+            </tr>
+        </table>
+    </div>
 
 
     <div class="modal fade" id="modal-new-timetable" tabindex="-1" role="dialog" aria-labelledby="modal-new-timetable"
@@ -238,6 +269,7 @@
     <script src='/assets/slot_handlers.js'></script>
     <script src='/assets/handlers.js'></script>
     <script src='/assets/clashchecks.js'></script>
+    <script src='/assets/suggestions.js'></script>
 
 </body>
 

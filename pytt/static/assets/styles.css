@@ -302,3 +302,52 @@ nav li.nav-item .btn-only {
   margin-bottom: 20px;
   font-family: 'Fira Mono';
 }
+
+
+
+
+/* suggestion styles */ 
+#suggest-placement-box { 
+  font-family: 'Fira Mono';
+  padding-left: 10px; 
+  margin-top: 8px;
+  margin-left: 15px;
+  font-size: 0.8em;
+  width: 40px;
+  height:2.35em;
+}
+
+#suggestion-container { 
+  position: aboslute;
+  top: 60px; 
+  right: 0; 
+  background: white;
+  border: 1px solid #ccc; 
+  /* border-top: none; */
+  padding: 2px;
+  width: 300px;
+  font-size: 0.6em;
+  z-index: -1;
+}
+#top-loading-text{ 
+  display: none;
+  font-family: 'Fira Mono';
+  padding-left: 10px; 
+  margin-top: 15px;
+  margin-left: 15px;
+  font-size: 0.7em;
+  color: #666;
+}
+
+#suggestion-container  tr th { 
+  border-top: none;
+}
+.btn-place { 
+  font-size: 0.8em;
+}
+#suggestion-container .btn { 
+  font-size: 0.6em;
+}
+#suggestion-container td.normal-td { 
+  padding-top: 1em;
+}
