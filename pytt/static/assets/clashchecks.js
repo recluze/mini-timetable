@@ -1,3 +1,37 @@
+function clash_count_badge_click_handler(btn) { 
+    console.log("Showing clashing students ..."); 
+    alloc_id = $(btn).siblings().eq(0).text(); 
+    alloc_id = alloc_id.substring(0, alloc_id.length - 2);
+    all_students_in_clash = window.all_clashes[window.current_clashes_highlighted_for][alloc_id]; 
+
+    var cont = document.getElementById('clash-students-list');
+    $(".clash-student-tr").remove(); // remove previous list 
+
+    for (var idx in all_students_in_clash) { 
+        student_id = all_students_in_clash[idx]; 
+        student_name = window.student_to_course_map[student_id]['student_name']; 
+
+        // console.log("Showing Student:", student_id, student_name);
+
+        in_tr = document.createElement('tr');
+        in_tr.className = 'clash-student-tr'
+
+        in_td = document.createElement('td');
+        in_td.innerHTML = student_id
+        in_tr.appendChild(in_td);
+
+        in_td = document.createElement('td');
+        in_td.innerHTML = student_name;
+        in_tr.appendChild(in_td);
+
+        cont.appendChild(in_tr);
+    }
+
+    $("#clash-students-box").modal('show');
+
+
+}
+
 function highlight_for_student_clash(alloc_id, clash_students) { 
     variants = [alloc_id + "-1", alloc_id + "-2"]; 
     clash_count = clash_students.length 
@@ -13,6 +47,12 @@ function highlight_for_student_clash(alloc_id, clash_students) {
         $('#' + alloc_box_id).addClass('in-clash-student'); 
         $('#' + alloc_box_id + " .clash-count").text(clash_count); 
         $('#' + alloc_box_id + " .clash-count").show(); 
+
+        $('#' + alloc_box_id + " .clash-count").click(function (e) {
+            e.preventDefault(); 
+            e.stopPropagation(); // do not do click of parent 
+            clash_count_badge_click_handler(this); 
+        });
     }
 }
 
@@ -55,6 +95,7 @@ function check_clashes_for(alloc_id) {
     // remove the suffix 
     alloc_id = alloc_id.substring(0, alloc_id.length - 2)
     console.log("Checking clashes for: ", alloc_id); 
+    window.current_clashes_highlighted_for = alloc_id;    // Need this for students in badge click 
     
     // get clashes from all_clashes 
     clash_dict = window.all_clashes[alloc_id]; 

@@ -22,6 +22,8 @@ function process_suggestion_place_button(btn) {
     
     // also update the remaining list 
     find_all_remaining_alloc_ids(); 
+    update_event_handlers(); 
+
     // remove this row since it's placed 
     // btn -> td -> tr 
     $(btn).parent().parent().remove(); 

@@ -359,3 +359,10 @@ nav li.nav-item .btn-only {
 #suggestion-container td.normal-td { 
   padding-top: 1em;
 }
+
+
+
+#clash-students-box { 
+  font-family: 'Fira Sans';
+  font-size: 0.7em;
+}

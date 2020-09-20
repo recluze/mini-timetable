@@ -178,15 +178,18 @@ $(function () {
     /* keypress shortcuts */
     $(window).keydown(function (e) {
         // w is 87, r is 82 Get more from https://keycode.info/
-        if (e.ctrlKey && e.which == 87) {
+        if (e.ctrlKey && e.which == 87) {         // W 
             e.preventDefault();
             $('#btn-swap').trigger("click");
-        } else if (e.ctrlKey && e.which == 82) {
+        } else if (e.ctrlKey && e.which == 82) {  // R 
             e.preventDefault();
             $('#btn-remove').trigger("click");
-        } else if (e.ctrlKey && e.which == 76) {
+        } else if (e.ctrlKey && e.which == 76) {  // L 
             e.preventDefault();
             $('#btn-check-clash').trigger("click");
+        } else if (e.ctrlKey && e.which == 84) {  // T
+            e.preventDefault();
+            $('#btn-insert').trigger("click");
         }
     });
 });
