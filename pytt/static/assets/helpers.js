@@ -192,4 +192,10 @@ $(function () {
             $('#btn-insert').trigger("click");
         }
     });
+
+    /* drag and drop support */ 
+    $('.target').on('dragstart', function(e) {
+        console.log("Started drag ..."); 
+        console.log($(e).text());
+    });
 });

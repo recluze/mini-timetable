@@ -48,7 +48,7 @@ def find_clash_free_slot(course_id, free_slots, data, all_clashes, meta_data, co
     course_id_clipped = course_id[0][:-2]
     # find all clashes for this course 
     # app.logger.info(free_slots)
-    course_clashes = list(all_clashes[course_id_clipped].keys())
+
     # app.logger.info("Course clashes: " + str(course_clashes))
     
     slots_available = free_slots[:]

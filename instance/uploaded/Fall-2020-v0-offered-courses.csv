@@ -1,0 +1,123 @@
+﻿Sr#,Code,Title,Cr.Hrs,Teacher Name,Section,Max Seats
+1,EE502,Advanced Computer Architecture,3,Muhammad Amin,MCS-3A,50
+2,CS622,Advanced Machine Learning,3,Muhammad Nauman,PCS-2A,50
+3,CS505,Advanced Operating Systems,3,Omar Usman Khan,MCS-3A,50
+4,CS4104,Applied Machine Learning,3,Muhammad Taimoor Khan,BCS-1Z,50
+5,EE117,Applied Physics,3,Ali Abas Khan,BCS-1A,50
+6,EE117,Applied Physics,3,Ali Abas Khan,BCS-1B,50
+7,EE117,Applied Physics,3,Ali Abas Khan,BCS-1C,50
+8,EE117,Applied Physics,3,Mustafa Haider,BCS-1D,50
+9,EE117,Applied Physics,3,Mustafa Haider,BSE-1A,50
+10,EE117,Applied Physics,3,Mustafa Haider,BSE-1B,50
+11,CS319,Applied Programming,3,Fazl-e-Basit,MCS-3A,50
+12,MT119,Calculus and Analytical Geometry,3,Ikram Ullah,BCS-1A,50
+13,MT119,Calculus and Analytical Geometry,3,Ikram Ullah,BCS-1B,50
+14,MT119,Calculus and Analytical Geometry,3,Ikram Ullah,BCS-1C,50
+15,MT119,Calculus and Analytical Geometry,3,Ikram Ullah,BCS-1D,50
+16,MT119,Calculus and Analytical Geometry,3,Osama Sohrab,BSE-1A,50
+17,MT119,Calculus and Analytical Geometry,3,Osama Sohrab,BSE-1B,50
+18,EE213,Comp. Organization and Assembly Lang.,3,Muhammad Nauman,BCS-3A,50
+19,EE213,Comp. Organization and Assembly Lang.,3,Muhammad Nauman,BCS-3B,50
+20,EL213,Comp. Organization and Assembly Lang. Lab,1,Faisal Khan,BCS-3A,50
+21,EL213,Comp. Organization and Assembly Lang. Lab,1,Faisal Khan,BCS-3B,50
+22,EE204,Computer Architecture,3,Muhammad Amin,BCS-7A,50
+23,EE204,Computer Architecture,3,Muhammad Amin,BCS-7B,50
+24,CS418,Computer Graphics,3,Omar Usman Khan,BCS-7A,50
+25,CS418,Computer Graphics,3,Omar Usman Khan,BCS-7A1,50
+26,CS307,Computer Networks,3,Mashal Khan,BCS-5A,50
+27,CS307,Computer Networks,3,Mashal Khan,BCS-5B,50
+28,CL307,Computer Networks Lab,1,Sabahat Ijaz,BCS-5A,50
+29,CL307,Computer Networks Lab,1,Sabahat Ijaz,BCS-5B,50
+30,DS500,Data Science Tools and Technique,3,Bahar Ali,MDS-2A,50
+31,CS201,Data Structures,3,Fazl-e-Basit,BCS-7A,50
+32,CS218,Data Structures,3,Fazl-e-Basit,BCS-3A,50
+33,CS218,Data Structures,3,Fazl-e-Basit,BCS-3B,50
+34,CL218,Data Structures - Lab,1,Faisal Khan,BCS-3A,50
+35,CL218,Data Structures - Lab,1,Faisal Khan,BCS-3B,50
+36,MT224,Differential Equations (Cal II),3,Askar Ali,BCS-3A,50
+37,EE402,Digital Image Processing,3,Hafeez Ur Rehman,BCS-7A,30
+38,CS211,Discrete Structures,3,Nouman Azam,BCS-3A,50
+39,CS211,Discrete Structures,3,Nouman Azam,BCS-3B,50
+40,SS150,English Composition and Comprehension,2,Maryam Ali Khan,BCS-1A,50
+41,SS150,English Composition and Comprehension,2,Maryam Ali Khan,BCS-1B,50
+42,SS150,English Composition and Comprehension,2,Maryam Ali Khan,BCS-1C,50
+43,SS150,English Composition and Comprehension,2,Ayesha Aseem,BCS-1D,50
+44,SS150,English Composition and Comprehension,2,Ayesha Aseem,BSE-1A,50
+45,SS150,English Composition and Comprehension,2,Ayesha Aseem,BSE-1B,50
+46,SL150,English Composition and Comprehension - Lab,1,M Mehdi Khan,BCS-1A,50
+47,SL150,English Composition and Comprehension - Lab,1,M Mehdi Khan,BCS-1B,50
+48,SL150,English Composition and Comprehension - Lab,1,M Mehdi Khan,BCS-1C,50
+49,SL150,English Composition and Comprehension - Lab,1,Abida Farid,BCS-1D,50
+50,SL150,English Composition and Comprehension - Lab,1,Abida Farid,BSE-1A,50
+51,SL150,English Composition and Comprehension - Lab,1,Abida Farid,BSE-1B,50
+52,MG223,Fundamentals of Management,3,Mahvesh Ali Khan,BCS-3A,50
+53,MG223,Fundamentals of Management,3,Mahvesh Ali Khan,BCS-3B,50
+54,MG223,Fundamentals of Management,3,Mahvesh Ali Khan,BSE-3A,50
+55,CS422,Human Computer Interaction,3,Shoaib Muhammad Khan,BCS-7A,50
+56,CS422,Human Computer Interaction,3,Shoaib Muhammad Khan,BCS-7B,50
+57,CS422,Human Computer Interaction,3,Shoaib Muhammad Khan,BSE-3A,50
+58,CL117,Intro to Info. and Comm. Technologies,1,Muhammad Yousaf,BCS-1A,50
+59,CL117,Intro to Info. and Comm. Technologies,1,Muhammad Yousaf,BCS-1B,50
+60,CL117,Intro to Info. and Comm. Technologies,1,Muhammad Yousaf,BCS-1C,50
+61,CL117,Intro to Info. and Comm. Technologies,1,Muhammad Yousaf,BCS-1D,50
+62,CL117,Intro to Info. and Comm. Technologies,1,Asad Khan,BSE-1A,50
+63,CL117,Intro to Info. and Comm. Technologies,1,Asad Khan,BSE-1B,50
+64,MT104,Linear Algebra,3,Askar Ali,BCS-3A,50
+65,MT104,Linear Algebra,3,Askar Ali,BCS-3B,50
+66,MT104,Linear Algebra,3,Askar Ali,BSE-3A,50
+67,CS531,Machine Learning,3,Muhammad Taimoor Khan,BCS-7A,30
+68,DS503,Machine Learning for Data Science,3,Muhammad Nauman,MDS-3A,50
+69,CS627,Medical Image Processing,3,Hafeez Ur Rehman,PCS-9A,50
+70,SS135,Micro Economics,3,Ihsan Ullah,BCS-7A,50
+71,SS135,Micro Economics,3,Ihsan Ullah,BCS-7B,50
+72,CS591,MS Thesis - I,3,Muhammad Taimoor Khan,MCS-3A,50
+73,CS592,MS Thesis - II,3,Muhammad Taimoor Khan,MCS-3A,50
+74,CS592,MS Thesis - II,3,No Teacher Assigned,MCS-4A,50
+75,CS458,Natural Language Processing,3,Muhammad Taimoor Khan,BCS-9A,30
+76,CS535,Natural Language Processing,3,Muhammad Taimoor Khan,MDS-3A,50
+77,CS411,Network Security,3,Mohammad Tehseen Khan,BCS-9A,50
+78,CS325,Numerical Computing,3,Refatullah Jan,BCS-5A,50
+79,MT207,Numerical Methods,3,Refatullah Jan,BCS-7A,50
+80,CS309,Object Oriented Analysis and Design,3,Safia Fatima,BCS-7A,50
+81,CL309,Object Oriented Analysis and Design Lab,1,Muhammad Hamza,BCS-7A,50
+82,CS217,Object Oriented Programming,3,Safia Fatima,BCS-3A,50
+83,CL217,Object Oriented Programming - Lab,1,Shahzad Khan,BCS-3A,50
+84,SS113,Pakistan Studies,3,Gohar Ali Shah,BCS-1A,50
+85,SS113,Pakistan Studies,3,Gohar Ali Shah,BCS-1B,50
+86,SS113,Pakistan Studies,3,Gohar Ali Shah,BCS-1C,50
+87,SS113,Pakistan Studies,3,Muhammad Iqbal,BCS-1D,50
+88,SS113,Pakistan Studies,3,Muhammad Iqbal,BSE-1A,50
+89,SS113,Pakistan Studies,3,Muhammad Iqbal,BSE-1B,50
+90,CS606,PhD Thesis - I,6,No Teacher Assigned,PCS-5A,50
+91,CS607,PhD Thesis - II,6,No Teacher Assigned,PCS-9A,50
+92,CS608,PhD Thesis - III,6,No Teacher Assigned,PCS-5A,50
+93,MT205,Probability and Statistics,3,Salman khan,BCS-5A,50
+94,MT205,Probability and Statistics,3,Salman khan,BCS-5B,50
+95,MT206,Probability and Statistics,4,Salman khan,BCS-7A,50
+96,CS449,Professional Issues in IT,3,Shakir Ullah Shah,BCS-9A,50
+97,CS118,Programming Fundamentals,3,Waqas Ali,BCS-1A,50
+98,CS118,Programming Fundamentals,3,Waqas Ali,BCS-1B,50
+99,CS118,Programming Fundamentals,3,Waqas Ali,BCS-1C,50
+100,CS118,Programming Fundamentals,3,Waqas Ali,BCS-1D,50
+101,CS118,Programming Fundamentals,3,Sara Rehmat,BSE-1A,50
+102,CS118,Programming Fundamentals,3,Sara Rehmat,BSE-1B,50
+103,CL118,Programming Fundamentals - Lab,1,Muhammad Hamza,BCS-1A,50
+104,CL118,Programming Fundamentals - Lab,1,Muhammad Hamza,BCS-1B,50
+105,CL118,Programming Fundamentals - Lab,1,Muhammad Hamza,BCS-1C,50
+106,CL118,Programming Fundamentals - Lab,1,Muhammad Hamza,BCS-1D,50
+107,CL118,Programming Fundamentals - Lab,1,Sabahat Ijaz,BSE-1A,50
+108,CL118,Programming Fundamentals - Lab,1,Sabahat Ijaz,BSE-1B,50
+109,CS491,Project - I,3,Mashal Khan,BCS-7A,50
+110,CS492,Project - II,3,Mashal Khan,BCS-9A,50
+111,SS511,Research Methodology,1,Muhammad Tariq,MCS-3A,50
+112,CS324,Software Design and Analysis,3,Safia Fatima,BCS-5A,50
+113,CS324,Software Design and Analysis,3,Safia Fatima,BCS-5B,50
+114,CS303,Software Engineering,3,Omar Usman Khan,BCS-9A,50
+115,SE210,Software Requirement Engineering,3,Sara Rehmat,BSE-3A,50
+116,DS501,Stat. and Math. Methods in Data Science,3,Omar Usman Khan,MDS-3A,50
+117,SS108,Technical and Business Writing,3,Maryam Ali Khan,BCS-5A,50
+118,SS153,Technical and Business Writing,3,Maryam Ali Khan,BCS-5A,50
+119,SS153,Technical and Business Writing,3,Maryam Ali Khan,BCS-5B,50
+120,CS301,Theory of Automata,3,Shakir Ullah Shah,BCS-5A,50
+121,CS301,Theory of Automata,3,Shakir Ullah Shah,BCS-5B,50
+122,CS507,Theory of Programming Languages,3,Shakir Ullah Shah,MCS-3A,50
